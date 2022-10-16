@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Register {% endblock title %}
+{% block title %} Registration {% endblock title %}
 
+{% block content %}
 <div class="bg-image" style="background: url('https://unsplash.com/photos/Tk0B3Dfkf_4/download?ixid=MnwxMjA3fDB8MXxjb2xsZWN0aW9ufDF8NzgyMTIzfHx8fHwyfHwxNjY1NjYyNjE0&force=true&w=1920')
     no-repeat center center fixed; 
     background-size: cover;
     height: 100vh">
+<<<<<<< HEAD
 {% block content %}
 <div class="container pt-5 pb-5">
   <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1030091365482233916/logo.png" class="mx-auto d-block" style="width:10%">
@@ -20,12 +22,20 @@
 {% endif %}
     <h1>Registration</h1>
 <br/>
+=======
+>>>>>>> test_merge
   <div class="container pt-5 pb-5">
-      <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1030091365482233916/logo.png" class="mx-auto d-block" style="width:10%">
-  </div>
+    <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1030091365482233916/logo.png" class="mx-auto d-block" style="width:10%">
+</div>
   <div class = "container">
     <div class="card shadow mx-5 opacity-100 rounded-5">
         <div class="card-body">
+          {% if form.errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              Invalid input. Please try again.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label = "Close"></button>
+          </div>
+          {% endif %}
         <form action="" method=POST>
             {% csrf_token %}
             {{ form.as_p }}
@@ -53,11 +63,11 @@
             <label for="input_email" class="form-label">Retry Password</label>
             <input type="password" class="form-control rounded-4" name="password">
           </div>
-          
-          
           <br>-->
           <div class = "text-center">
-            <input type="submit" class="Submit" class="btn btn-primary rounded-4">
+            <div class = "text-center">
+              <button type="submit" class="btn btn-primary rounded-4">Sign me up!</button>
+            </div>
           </div>
         </form>
         </div>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -9,7 +9,7 @@ from .forms import VenueForm
 
 @login_required(login_url='/users/login_user')
 def home(request):
-    event_list = Event.objects.all()
+    event_list = Event.objects.all().order_by('event_date')
     return render(request, 'dashboard.html', 
     {'event_list': event_list})
 
@@ -28,7 +28,7 @@ def add_venue(request):
     return render(request, 'add_venue.html', {'form': form, 'submitted': submitted})
 
 def list_venue(request):
-    venue_list = Venue.objects.all()
+    venue_list = Venue.objects.all().order_by('venue_name')
     return render(request, 'venue.html', 
     {'venue_list': venue_list})
 
@@ -45,8 +45,19 @@ def search_venue(request):
     else: 
         return render(request, 'search_venue.html', {})
 
+<<<<<<< HEAD
 #Inbox
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True)
 def inbox(request):
     return render(request, 'inbox.html',{})
+=======
+def update_venue(request, venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    form = VenueForm(request.POST or None, instance=venue)
+    if form.is_valid():
+        form.save()
+        return redirect('show-venue', venue.id)
+    return render(request, 'update_venue.html', 
+    {'venue': venue, 'form': form})
+>>>>>>> test_merge
