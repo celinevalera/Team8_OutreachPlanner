@@ -7,7 +7,7 @@
     ">
 {% include 'navbar.html' %}
 <br>
-    <h5 class="text-start"><a class="badge badge-light"  href="{% url 'home' %}"> &lt;-- Back</a></h5>
+    <h5 class="text-start"><a class="badge badge-light"  href="{% url 'home' %}"> &larr; Back</a></h5>
     <div>
         <div>
             <h1 class="text-center"><strong>Venues</strong></h1> 
@@ -16,7 +16,7 @@
             </h5>
         </div>
     </div>
-    
+        
     <div class="container">
         <div>
             <form class="d-flex" method=POST action="{% url 'search-venue' %}">
