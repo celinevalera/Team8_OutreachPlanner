@@ -45,13 +45,11 @@ def search_venue(request):
     else: 
         return render(request, 'search_venue.html', {})
 
-<<<<<<< HEAD
 #Inbox
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True)
 def inbox(request):
     return render(request, 'inbox.html',{})
-=======
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     form = VenueForm(request.POST or None, instance=venue)
@@ -60,4 +58,3 @@ def update_venue(request, venue_id):
         return redirect('show-venue', venue.id)
     return render(request, 'update_venue.html', 
     {'venue': venue, 'form': form})
->>>>>>> test_merge
