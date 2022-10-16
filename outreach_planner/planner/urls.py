@@ -8,4 +8,5 @@ urlpatterns = [
     path('list_venue', views.list_venue, name='list-venue'),
     path('show_venue/<venue_id>', views.show_venue, name='show-venue'),
     path('search_venue', views.search_venue, name='search-venue'),
+    path('inbox/',views.inbox, name="inbox")
 ]

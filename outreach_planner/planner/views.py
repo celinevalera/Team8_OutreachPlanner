@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 from .models import Event
 from .models import Event, Venue
 from .forms import VenueForm
@@ -43,3 +44,9 @@ def search_venue(request):
         return render(request, 'search_venue.html', {'searched': searched, 'venues': venues})
     else: 
         return render(request, 'search_venue.html', {})
+
+#Inbox
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True)
+def inbox(request):
+    return render(request, 'inbox.html',{})
