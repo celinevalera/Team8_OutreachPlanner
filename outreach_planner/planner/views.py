@@ -58,3 +58,8 @@ def update_venue(request, venue_id):
         return redirect('show-venue', venue.id)
     return render(request, 'update_venue.html', 
     {'venue': venue, 'form': form})
+
+def calendar(request):
+    event_list = Event.objects.all()
+    return render(request, 'calendar.html',
+    {'event_list': event_list})
