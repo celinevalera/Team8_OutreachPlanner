@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from .models import Event
 from .models import Event, Venue
-from .forms import VenueForm
+from .forms import VenueForm, EventForm
 
 @login_required(login_url='/users/login_user')
 def home(request):
@@ -63,3 +63,17 @@ def calendar(request):
     event_list = Event.objects.all()
     return render(request, 'calendar.html',
     {'event_list': event_list})
+
+def add_event(request):
+    submitted = False
+    if request.method == "POST":
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_event?submitted=True')
+    else: 
+        form = EventForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'add_event.html', {'form': form, 'submitted': submitted})

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+    <br>
+    <center>
+        <h1>Add Event</h1>
+    <br><br>
+
+    {% if submitted %}
+        Your Event was Submitted Successfully!
+        <div>
+            <a class="nav-link text-dark" href="{% url 'add_event' %}">Click here to add more Event</a>
+        </div>
+        
+    {% else %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Submit" class="btn btn-success">
+        </form>
+
+    {% endif %}
+    </center>
+{% endblock %}

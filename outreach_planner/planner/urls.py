@@ -11,4 +11,5 @@ urlpatterns = [
     path('inbox/',views.inbox, name="inbox"),
     path('update_venue/<venue_id>', views.update_venue, name='update-venue'),
     path('calendar/',views.calendar),
+    path('add_event',views.add_event),
 ]
