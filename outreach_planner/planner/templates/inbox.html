@@ -9,10 +9,21 @@
     height: 100vh">
 
 {% include 'navbar.html' %}
-<div class="container pt-5 pb-5">
-  <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1030091365482233916/logo.png" class="mx-auto d-block" style="width:10%">
-</div>
-<h1>Inbox</h1>
-<div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-3">
+      {% for email in email_list %}
+      <div class="col">
+          
+            <div class="card h-100 shadow rounded-4">
+              <div class="card-header text-center">
+              </div>
+              <div class="card-body">
+                  </a><h4 class="card-title">{{ email.user.first_name}} {{ email.user.last_name}}</h4>
+              </div>
+              </div>
+          
+      </div>
+      {% endfor %}
+  </div>
 </div>
 {% endblock content %}

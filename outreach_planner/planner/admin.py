@@ -6,8 +6,10 @@ from django.contrib import admin
 from .models import Venue
 from .models import Volunteer
 from .models import Event
+from .models import Inbox
 
 admin.site.register(Volunteer)
+admin.site.register(Inbox)
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):

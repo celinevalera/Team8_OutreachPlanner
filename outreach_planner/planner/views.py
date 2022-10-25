@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
-from .models import Event
+from .models import Event, Inbox
 from .models import Event, Venue
 from .forms import VenueForm
 
@@ -49,7 +49,9 @@ def search_venue(request):
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True)
 def inbox(request):
-    return render(request, 'inbox.html',{})
+    email_list = Inbox.objects.all()
+    return render(request, 'inbox.html',{'email_list':email_list})
+
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     form = VenueForm(request.POST or None, instance=venue)
