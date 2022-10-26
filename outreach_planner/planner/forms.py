@@ -1,7 +1,7 @@
 from django import forms
 from django import forms
 from django.forms import EmailField, EmailInput, ModelForm
-from .models import Venue
+from .models import Inbox, Venue
 
 #Venue Form
 class VenueForm(ModelForm):
@@ -23,4 +23,3 @@ class VenueForm(ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Contact Email'}),
 
         }
-    
