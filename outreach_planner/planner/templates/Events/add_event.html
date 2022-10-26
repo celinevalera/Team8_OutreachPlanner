@@ -8,18 +8,18 @@
 {% include 'navbar.html' %}
     <br>
     <br>
-    <h5><a class="badge badge-light"  href="{% url 'list-venue' %}">  &larr; Back</a></h5>
+    <h5><a class="badge badge-light"  href="{% url 'list-event' %}">  &larr; Back</a></h5>
     <center>
-        <h1>Add a Venue</h1>
+        <h1>Add an Event</h1>
     <br><br>
 
     {% if submitted %}
-        Your Venue was Submitted Successfully!
+        Event Submitted Succesfully!
         <h5 class="text-end pe-5">
-            <a class="btn btn-success btn-sm" href="{% url 'add-venue' %}"> + Add more Venue</a>
+            <a class="btn btn-success btn-sm" href="{% url 'add-event' %}"> + Add more Event</a>
         </h5>
         <h5 class="text-end pe-5">
-            <a class="btn btn-success btn-sm" href="{% url 'list-venue' %}"> Go to Venues</a>
+            <a class="btn btn-success btn-sm" href="{% url 'list-event' %}"> Go to Events</a>
         </h5>
     {% else %}
 

@@ -30,7 +30,7 @@
             {% for venue in venue_list %}
             
             <div class="col">
-            <a href="{% url 'show-venue' venue.id %}" >
+            <a data-bs-toggle="modal" data-bs-target="{% url 'show-venue' venue.id %}" >
               <div class="card h-100 shadow rounded-4">
                 <div class="card-header text-center">
                 </div>
@@ -47,3 +47,5 @@
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
 </div>
 {% endblock content %}
+
+{% include 'test_modal.html' %}

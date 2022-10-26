@@ -7,14 +7,14 @@
     min-height: 100vh;">
 {% include 'navbar.html' %}
     <br>
-    <h5><a class="badge badge-light"  href="{% url 'show-venue' venue.id %}">  &larr; Back</a></h5>
+    <h5><a class="badge badge-light"  href="{% url 'show-event' event.id %}">  &larr; Back</a></h5>
     <div class="text-center py-5">
-        <h1>Update <strong>{{ venue.venue_name }}</strong></h1>
+        <h1>Update <strong>{{ event.event_name }}</strong></h1>
     </div>
     <div class="container">
               <div class="card h-100 shadow rounded-4">
                 <div class="card-header text-center">
-                    <h5><strong>Venue Details</strong></h5>
+                    <h5><strong>Event Details</strong></h5>
                   </div>
                 <!--<img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">-->
                 <div class="card-body text-center">

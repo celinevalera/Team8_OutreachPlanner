@@ -10,5 +10,11 @@ urlpatterns = [
     path('search_venue', views.search_venue, name='search-venue'),
     path('inbox/',views.inbox, name="inbox"),
     path('update_venue/<venue_id>', views.update_venue, name='update-venue'),
+    path('add_event', views.add_event, name='add-event'),
+    path('list_event', views.list_event, name='list-event'),
+    path('show_event/<event_id>', views.show_event, name='show-event'),
+    path('search_event', views.search_event, name='search-event'),
+    path('update_event/<event_id>', views.update_event, name='update-event'),
+
     path('calendar/',views.calendar),
 ]

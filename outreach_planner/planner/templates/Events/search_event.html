@@ -7,22 +7,22 @@
     min-height: 100vh;">
 {% include 'navbar.html' %}
 <br>
-    <h5 class="text-left"><a class="badge badge-light"  href="{% url 'list-venue' %}"> &larr; Back</a></h5>
+    <h5 class="text-left"><a class="badge badge-light"  href="{% url 'list-event' %}"> &larr; Back</a></h5>
     <div class="text-center py-5">
         {% if searched %}
              <h1><strong>Search Results for {{ searched }}</strong></h1> 
              <br>
              <div class="container">
                 <div class="row row-cols-1 row-cols-md-3 g-3">
-                    {% for venue in venues %}
+                    {% for event in event %}
                     <div class="col">
-                        <a href="{% url 'show-venue' venue.id %}" >
+                        <a href="{% url 'show-event' event.id %}" >
                           <div class="card h-100 shadow rounded-4">
                             <div class="card-header text-center">
                             </div>
                             <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
                             <div class="card-body">
-                                </a><h4 class="card-title">{{ venue.venue_name }}</h4>
+                                </a><h4 class="card-title">{{ event.venue_name }}</h4>
                             </div>
                             </div>
                         </a>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         {% else %}
-            <h1><strong>Hey! You Forgot to Search a Venue...</strong></h1> 
+            <h1><strong>Hey! You Forgot to Search a Event...</strong></h1> 
         {% endif %}
     </div>
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>

@@ -6,6 +6,7 @@ from django.views.decorators.cache import cache_control
 from .models import Event, Inbox
 from .models import Event, Venue
 from .forms import VenueForm
+from .forms import EventForm
 
 @login_required(login_url='/users/login_user')
 def home(request):
@@ -65,3 +66,44 @@ def calendar(request):
     event_list = Event.objects.all()
     return render(request, 'calendar.html',
     {'event_list': event_list})
+
+def add_event(request):
+    submitted = False
+    if request.method == "POST":
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_event?submitted=True')
+    else: 
+        form = EventForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'Events/add_event.html', {'form': form, 'submitted': submitted})
+
+def list_event(request):
+    event_list = Event.objects.all().order_by('event_name')
+    return render(request, 'Events/event.html', 
+    {'event_list': event_list})
+
+def show_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    return render(request, 'Events/show_event.html', 
+    {'event': event})
+
+def search_event(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        events = Event.objects.filter(event_name__contains=searched)
+        return render(request, 'Events/search_event.html', {'searched': searched, 'events': events})
+    else: 
+        return render(request, 'Events/search_event.html', {})
+
+def update_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    form = EventForm(request.POST or None, instance=event)
+    if form.is_valid():
+        form.save()
+        return redirect('show-event', event.id)
+    return render(request, 'Events/update_event.html', 
+    {'event': event, 'form': form})
