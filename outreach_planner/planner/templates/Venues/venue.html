@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
+    no-repeat center center fixed; 
+    background-size: cover;
+    ">
+{% include 'navbar.html' %}
+<br>
+    <h5 class="text-start"><a class="badge badge-light"  href="{% url 'home' %}"> &larr; Back</a></h5>
+    <div>
+        <div>
+            <h1 class="text-center"><strong>Venues</strong></h1> 
+            <h5 class="text-end pe-5">
+                <a class="btn btn-success btn-sm" href="{% url 'add-venue' %}"> + Add a Venue</a>
+            </h5>
+        </div>
+    </div>
+        
+    <div class="container">
+        <div>
+            <form class="d-flex" method=POST action="{% url 'search-venue' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search Venues" aria-label="Search" name="searched">
+                <button class="btn btn-secondary" type="Submit">Search</button>
+            </form>
+        </div>
+        <br>
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            {% for venue in venue_list %}
+            
+            <div class="col">
+            <a href="{% url 'show-venue' venue.id %}" >
+              <div class="card h-100 shadow rounded-4">
+                <div class="card-header text-center">
+                </div>
+                <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                <div class="card-body">
+                    </a><h4 class="card-title">{{ venue.venue_name }}</h4>
+                </div>
+                </div>
+            </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+</div>
+{% endblock content %}

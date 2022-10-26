@@ -25,25 +25,25 @@ def add_venue(request):
         if 'submitted' in request.GET:
             submitted = True
 
-    return render(request, 'add_venue.html', {'form': form, 'submitted': submitted})
+    return render(request, 'Venues/add_venue.html', {'form': form, 'submitted': submitted})
 
 def list_venue(request):
     venue_list = Venue.objects.all().order_by('venue_name')
-    return render(request, 'venue.html', 
+    return render(request, 'Venues/venue.html', 
     {'venue_list': venue_list})
 
 def show_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
-    return render(request, 'show_venue.html', 
+    return render(request, 'Venues/show_venue.html', 
     {'venue': venue})
 
 def search_venue(request):
     if request.method == "POST":
         searched = request.POST['searched']
         venues = Venue.objects.filter(venue_name__contains=searched)
-        return render(request, 'search_venue.html', {'searched': searched, 'venues': venues})
+        return render(request, 'Venues/search_venue.html', {'searched': searched, 'venues': venues})
     else: 
-        return render(request, 'search_venue.html', {})
+        return render(request, 'Venues/search_venue.html', {})
 
 #Inbox
 @login_required(login_url="login")
@@ -58,7 +58,7 @@ def update_venue(request, venue_id):
     if form.is_valid():
         form.save()
         return redirect('show-venue', venue.id)
-    return render(request, 'update_venue.html', 
+    return render(request, 'Venues/update_venue.html', 
     {'venue': venue, 'form': form})
 
 def calendar(request):

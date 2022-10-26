@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
+    no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh;">
+{% include 'navbar.html' %}
+    <br>
+    <h5><a class="badge badge-light"  href="{% url 'list-venue' %}">  &larr; Back</a></h5>
+    <div class="text-center py-5">
+        <h1><strong>{{ venue.venue_name }}</strong></h1>
+        <h5 class="text-end pe-5">
+            <a class="btn btn-success btn-sm" href="{% url 'update-venue' venue.id %}"> Update Venue</a>
+        </h5>
+    </div>
+    <div class="container">
+              <div class="card h-100 shadow rounded-4">
+                <div class="card-header text-center">
+                    <strong>Venue Details</strong>
+                  </div>
+                <!--<img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">-->
+                <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <p class="card-text">
+                        <div class="text-truncate">
+                            <strong>Address:</strong> {{ venue.address }} <br/>
+                        </div>
+                        <div class="text-truncate">
+                            <strong>URL:</strong> {{ venue.web_link }}
+                        </div>
+                        <div class="text-truncate">
+                            <strong>Contact Phone:</strong> {{ venue.phone }} <br/>
+                        </div>
+                        <div class="text-truncate">
+                            <strong>Contact Email:</strong> {{ venue.email }} <br/>
+                        </div>
+                    </p>
+              </div>
+            </div>
+    </div>
+    <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+</div>
+{% endblock content %}
