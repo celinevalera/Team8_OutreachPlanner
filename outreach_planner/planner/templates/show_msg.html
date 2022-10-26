@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
+    no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh;">
+{% include 'navbar.html' %}
+    <br>
+    <h5><a class="badge badge-light"  href="{% url 'inbox' %}">  &larr; Back</a></h5>
+    <div class="text-center py-5">
+        <h1><strong>{{ inbox.user }}</strong></h1>
+        <h5 class="text-end pe-5">
+            <!--<a class="btn btn-success btn-sm" href="{% url 'update-venue' venue.id %}"> Update Venue</a>-->
+        </h5>
+    </div>
+{% endblock content %}
