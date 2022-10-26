@@ -13,6 +13,9 @@ def home(request):
     return render(request, 'dashboard.html', 
     {'event_list': event_list})
 
+#Events
+
+#Venue
 def add_venue(request):
     submitted = False
     if request.method == "POST":
@@ -45,13 +48,6 @@ def search_venue(request):
     else: 
         return render(request, 'search_venue.html', {})
 
-#Inbox
-@login_required(login_url="login")
-@cache_control(no_cache=True, must_revalidate=True)
-def inbox(request):
-    email_list = Inbox.objects.all()
-    return render(request, 'inbox.html',{'email_list':email_list})
-
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     form = VenueForm(request.POST or None, instance=venue)
@@ -61,6 +57,14 @@ def update_venue(request, venue_id):
     return render(request, 'update_venue.html', 
     {'venue': venue, 'form': form})
 
+#Inbox
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True)
+def inbox(request):
+    email_list = Inbox.objects.all()
+    return render(request, 'inbox.html',{'email_list':email_list})
+
+#Calendar
 def calendar(request):
     event_list = Event.objects.all()
     return render(request, 'calendar.html',
