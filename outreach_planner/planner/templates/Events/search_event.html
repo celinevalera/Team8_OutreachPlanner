@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %} Search Results for {{ searched }} {% endblock title %}
+
 {% block content %}
-<div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
+<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
     no-repeat center center fixed; 
     background-size: cover;
     min-height: 100vh;">
@@ -14,7 +16,7 @@
              <br>
              <div class="container">
                 <div class="row row-cols-1 row-cols-md-3 g-3">
-                    {% for event in event %}
+                    {% for event in events %}
                     <div class="col">
                         <a href="{% url 'show-event' event.id %}" >
                           <div class="card h-100 shadow rounded-4">
