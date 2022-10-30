@@ -8,16 +8,25 @@
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-<br>
-    <h5 class="text-start"><a class="badge badge-light"  href="{% url 'home' %}"> &larr; Back</a></h5>
-    <div>
-        <div>
-            <h1 class="text-center"><strong>Venues</strong></h1> 
-            <h5 class="text-end pe-5">
-                <a class="btn btn-success btn-sm" href="{% url 'add-venue' %}"> + Add a Venue</a>
-            </h5>
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col">
+            <div class="text-start">
+                <a class="btn btn-success btn-sm rounded-4"  href="{% url 'home' %}">&larr; Back</a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center">
+                <h1><strong>Venues</strong></h1>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-end">
+                <a class="btn btn-success btn-sm rounded-4" href="{% url 'add-venue' %}">+ Add a Venue</a>
+            </div>
         </div>
     </div>
+</div>
         
     <div class="container">
         <div>
@@ -41,7 +50,6 @@
                     </a><h4 class="card-title">{{ venue.venue_name }}</h4>
                 </div>
                 </div>
-            </a>
             </div>
             {% endfor %}
         </div>

@@ -8,12 +8,25 @@
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-<br>
-    <h5 class="text-left"><a class="badge badge-light"  href="{% url 'list-event' %}"> &larr; Back</a></h5>
-    <div class="text-center py-5">
         {% if searched %}
-             <h1><strong>Search Results for {{ searched }}</strong></h1> 
-             <br>
+        <div class="container">
+            <div class="row align-items-center py-5">
+                <div class="col">
+                    <div class="text-start">
+                        <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center">
+                        <h1>Search Results for <strong>{{ searched }}</strong></h1> 
+                    </div>
+                </div>
+                <div class="col">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
              <div class="container">
                 <div class="row row-cols-1 row-cols-md-3 g-3">
                     {% for event in events %}
@@ -33,7 +46,7 @@
                 </div>
             </div>
         {% else %}
-            <h1><strong>Hey! You Forgot to Search a Event...</strong></h1> 
+            <h1><strong>Hey! You forgot to search an Event...</strong></h1> 
         {% endif %}
     </div>
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>

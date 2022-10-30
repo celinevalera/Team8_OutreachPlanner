@@ -15,8 +15,9 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for event in event_list %}
             <div class="col">
+            <!--<a href="{% url 'show-event' event.id %}" class="stretched-link"></a>-->
               <div class="card h-100 shadow rounded-4">
-                <div class="card-header text-center">
+              <div class="card-header text-center">
                     {{ event.event_date.date }}
                   </div>
                 <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
@@ -34,6 +35,7 @@
                         </div>
                     </p>
               </div>
+            </a>
             </div>
             </div>
             {% endfor %}

@@ -8,12 +8,25 @@
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-    <br>
-    <br>
-    <h5><a class="badge badge-light"  href="{% url 'list-event' %}">  &larr; Back</a></h5>
-    <center>
-        <h1>Add an Event</h1>
-    <br><br>
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col">
+                <div class="text-start">
+                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center">
+                    <h1><strong>Add an Event</strong></h1>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-end">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% if submitted %}
         Event Submitted Succesfully!

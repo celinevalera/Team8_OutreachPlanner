@@ -8,11 +8,26 @@
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-    <br>
-    <h5><a class="badge badge-light"  href="{% url 'show-venue' venue.id %}">  &larr; Back</a></h5>
-    <div class="text-center py-5">
-        <h1>Update <strong>{{ venue.venue_name }}</strong></h1>
+   <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col">
+                <div class="text-start">
+                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'show-venue' venue.id %}">&larr; Back</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center">
+                    <h1>Update <strong>{{ venue.venue_name }}</strong></h1>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-end">
+                    
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="container">
               <div class="card h-100 shadow rounded-4">
                 <div class="card-header text-center">

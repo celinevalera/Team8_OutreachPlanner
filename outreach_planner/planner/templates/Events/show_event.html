@@ -8,14 +8,26 @@
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-    <br>
-    <h5><a class="badge badge-light"  href="{% url 'list-event' %}">  &larr; Back</a></h5>
-    <div class="text-center py-5">
-        <h1><strong>{{ event.event_name }}</strong></h1>
-        <h5 class="text-end pe-5">
-            <a class="btn btn-success btn-sm" href="{% url 'update-event' event.id %}"> Update Event</a>
-        </h5>
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col">
+                <div class="text-start">
+                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center">
+                    <h1><strong>{{ event.event_name }}</strong></h1>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-end">
+                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="container">
               <div class="card h-100 shadow rounded-4">
                 <div class="card-header text-center">
