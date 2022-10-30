@@ -3,7 +3,7 @@
 {% block title %} Dashboard {% endblock title %}
 
 {% block content %}
-<div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
+<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
     no-repeat center center fixed; 
     background-size: cover;
     min-height: 100vh;">
@@ -27,7 +27,7 @@
                             <strong>Time:</strong> {{ event.event_date.time }} <br/>
                         </div>
                         <div class="text-truncate">
-                            <strong>Event Organizer:</strong> {{ event.organizer }}
+                            <strong>Event Organizer:</strong> {% for user in event.organizer.all %} {{ user }}, {% endfor %}
                         </div>
                         <div class="text-truncate">
                             <strong>Description:</strong> {{ event.description }} <br/>
