@@ -12,17 +12,17 @@ class EventForm(ModelForm):
         labels = {
             'event_name': '',
             'event_date': '',
-            'venue': '',
-            'organizer': '',
+            'venue': 'Venue',
+            'organizer': 'Organizer',
             'description': '',
-            'volunteers': '',
+            'volunteers': 'Attendees',
         }
         widgets = {
             'event_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Event Name'}),
-            'event_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Date'}),
+            'event_date': forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'Date'}),
             'venue': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Venue'}),
             'organizer': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Organizer'}),
-            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
             'volunteers': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Volunteers'}),
         }
     

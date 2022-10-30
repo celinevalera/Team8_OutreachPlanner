@@ -103,6 +103,7 @@ def update_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     form = EventForm(request.POST or None, instance=event)
     if form.is_valid():
+        form.save(commit=False)
         form.save()
         return redirect('show-event', event.id)
     return render(request, 'Events/update_event.html', 
