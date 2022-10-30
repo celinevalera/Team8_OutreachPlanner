@@ -69,3 +69,6 @@ def inbox(request):
 def show_msg(request,inbox_id):
     email = Inbox.objects.get(pk=inbox_id)
     return render(request, 'show_msg.html',{'email':email})
+
+def create_msg(request):
+    return render(request, 'create_msg.html', {})
