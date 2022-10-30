@@ -27,15 +27,15 @@ class VenueForm(ModelForm):
 class MessageForm(ModelForm):
     class Meta:
         model = Inbox
-        fields = "__all__"
+        fields = "recipient","subject","body"
         labels = {
-            'recipient':'',
-            'subject':'',
-            'body':'',
+            'recipient': '',
+            'subject': '',
+            'body': '',
             
         }
         widgets = {
-            'recipient': forms.EmailField(attrs={'class': 'form-control', 'placeholder': 'Venue Name'}),
-            'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address'}),
-            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Web Link'}),
+            'recipient': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'recipient'}),
+            'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'subject'}),
+            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'body'}),
         }

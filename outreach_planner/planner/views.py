@@ -1,11 +1,12 @@
+from email.message import Message
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
-from .models import Event, Inbox
-from .models import Event, Venue
-from .forms import VenueForm
+from .models import Event, Inbox,Venue
+from .forms import VenueForm, MessageForm
+
 
 @login_required(login_url='/users/login_user')
 def home(request):
@@ -71,4 +72,15 @@ def show_msg(request,inbox_id):
     return render(request, 'show_msg.html',{'email':email})
 
 def create_msg(request):
-    return render(request, 'create_msg.html', {})
+    submitted = False
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/create_msg?submitted=True')
+    else: 
+        form = MessageForm
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    return render(request, 'create_msg.html',{'form':form})

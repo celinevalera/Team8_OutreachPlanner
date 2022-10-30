@@ -9,6 +9,9 @@
     height: 100vh">
 
 {% include 'navbar.html' %}
+<h5 class="text-end pe-5">
+  <a class="btn btn-success btn-sm" href="{% url 'new-msg' %}"> + New Message</a>
+</h5>
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-3">
       {% for email in email_list %}

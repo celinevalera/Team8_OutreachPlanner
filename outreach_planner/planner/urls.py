@@ -12,4 +12,6 @@ urlpatterns = [
     path('show_msg/<inbox_id>',views.show_msg, name='show-msg'),
     path('update_venue/<venue_id>', views.update_venue, name='update-venue'),
     path('calendar/',views.calendar),
+    path('create_msg/',views.create_msg, name='new-msg'),
+
 ]

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
+    no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh;">
+{% include 'navbar.html' %}
+    <br>
+    <br>
+    <h5><a class="badge badge-light"  href="{% url 'home' %}">  &larr; Back</a></h5>
+    <center>
+        <h1>Create New Message</h1>
+    <br><br>
+
+    {% if submitted %}
+        Your Venue was Submitted Successfully!
+        <h5 class="text-end pe-5">
+            <a class="btn btn-success btn-sm" href="{% url 'add-venue' %}"> + New Message </a>
+        </h5>
+        <h5 class="text-end pe-5">
+            <a class="btn btn-success btn-sm" href="{% url 'home' %}"> Go to Dashboard </a>
+        </h5>
+    {% else %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Sent" class="btn btn-success">
+        </form>
+
+    {% endif %}
+    </center>
+    <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+{% endblock %}
