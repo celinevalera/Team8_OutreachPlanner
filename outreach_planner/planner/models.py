@@ -33,6 +33,8 @@ class Event(models.Model):
     description = models.TextField(blank=True)
     volunteers = models.ManyToManyField(Volunteer, blank=True)
 
+
+
     def __str__(self):
         return self.event_name
 
