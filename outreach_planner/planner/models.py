@@ -1,4 +1,5 @@
 
+from concurrent.futures import thread
 from tokenize import blank_re
 from unittest.util import _MAX_LENGTH
 from django.db import models
@@ -35,16 +36,17 @@ class Event(models.Model):
     def __str__(self):
         return self.event_name
 
-class Inbox(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
-    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
-    subject = models.CharField(max_length=500, blank=True, null = True)
-    body = models.TextField(max_length=1000, blank=True, null=True)
+class ThreadModel(models.Model):
+    user =models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+
+class MessageModel(models.Model):
+    thread = models.ForeignKey(ThreadModel, related_name='+', on_delete=models.CASCADE, blank=True, null=True)
+    sender_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    receiver_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    body = models.CharField(max_length = 1000)
     date = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
-    
-    def __str__(self):
-        return self.user.first_name+' '+self.user.last_name
+
 
 

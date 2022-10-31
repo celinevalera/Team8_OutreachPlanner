@@ -1,7 +1,7 @@
 from django import forms
 from django import forms
 from django.forms import EmailField, EmailInput, ModelForm
-from .models import Inbox, Venue
+from .models import Venue
 
 #Venue Form
 class VenueForm(ModelForm):
@@ -24,18 +24,8 @@ class VenueForm(ModelForm):
 
         }
 
-class MessageForm(ModelForm):
-    class Meta:
-        model = Inbox
-        fields = "recipient","subject","body"
-        labels = {
-            'recipient': '',
-            'subject': '',
-            'body': '',
-            
-        }
-        widgets = {
-            'recipient': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'recipient'}),
-            'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'subject'}),
-            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'body'}),
-        }
+class ThreadForm(forms.Form):
+    username = forms.CharField(label='', max_length=1000)
+
+class MessageForm(forms.Form):
+    message = forms.CharField(label='', max_length=1000)

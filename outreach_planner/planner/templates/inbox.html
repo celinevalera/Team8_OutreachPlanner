@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block title %} Inbox {% endblock title %}
 
 {% block content %}
@@ -10,17 +11,17 @@
 
 {% include 'navbar.html' %}
 <h5 class="text-end pe-5">
-  <a class="btn btn-success btn-sm" href="{% url 'new-msg' %}"> + New Message</a>
+  <a class="btn btn-success btn-sm" href="{% url 'create-thread' %}"> + New Message</a>
 </h5>
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-3">
-      {% for email in email_list %}
+      {% for thread in threads.all %}
       <div class="col">
-        <a href="{% url 'show-msg' email.id %}">
           <div class="card h-100 shadow rounded-4">
             <div class="card-header text-center"></div>
-              <div class="card-body">
-              </a><h4 class="card-title">{{ email.user.first_name}} {{ email.user.last_name}}</h4>
+              <div class="card-body"></a>
+              <h4 class="card-title">{{thread.user}} {{ thread.receiver }}</h4>
+              <a class="stretched-link" href="{% url 'thread' thread.pk %}"></a>
               </div>
             </div>
         </a>

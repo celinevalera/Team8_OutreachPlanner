@@ -1,37 +1,39 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="bg-image" style="background: url('https://unsplash.com/photos/n20DUSVsUk8/download?force=true&w=1920')
     no-repeat center center fixed; 
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-    <br>
-    <br>
-    <h5><a class="badge badge-light"  href="{% url 'home' %}">  &larr; Back</a></h5>
     <center>
-        <h1>Create New Message</h1>
-    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class=""col-md-12 p-5>
+                <a class="badge badge-light"  href="{% url 'inbox' %}">  &larr; Back</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class=""col-md-12 p-5>
+                <h3>Create New Message</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 mb-5">
+            <div class="col-md-5 col-sm-12">
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>Receiver Username:</p>
+                    {{ form }}
+                    <div class="d-grip gap-2">
+                        <button class="btn btn-success mt-3" type="submit"> Continue</button>
+                    </div>
 
-    {% if submitted %}
-        Your Venue was Submitted Successfully!
-        <h5 class="text-end pe-5">
-            <a class="btn btn-success btn-sm" href="{% url 'add-venue' %}"> + New Message </a>
-        </h5>
-        <h5 class="text-end pe-5">
-            <a class="btn btn-success btn-sm" href="{% url 'home' %}"> Go to Dashboard </a>
-        </h5>
-    {% else %}
+        </div>
+    </div>
 
-        <form action="" method="POST">
-            {% csrf_token %}
-
-            {{ form.as_p }}
-
-            <input type="submit" value="Sent" class="btn btn-success">
-        </form>
-
-    {% endif %}
+        
+   
     </center>
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
 {% endblock %}
