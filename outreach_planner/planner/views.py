@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import cache_control
 from .models import Event, Inbox
 from .models import Venue
@@ -15,6 +16,7 @@ def home(request):
     {'event_list': event_list})
 
 #Venue
+@staff_member_required(login_url='home')
 def add_venue(request):
     submitted = False
     if request.method == "POST":
@@ -47,6 +49,7 @@ def search_venue(request):
     else: 
         return render(request, 'Venues/search_venue.html', {})
 
+@staff_member_required(login_url='home')
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     form = VenueForm(request.POST or None, request.FILES or None, instance=venue)
@@ -56,6 +59,7 @@ def update_venue(request, venue_id):
     return render(request, 'Venues/update_venue.html', 
     {'venue': venue, 'form': form})
 
+@staff_member_required(login_url='home')
 def delete_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     venue.delete()
@@ -75,6 +79,7 @@ def calendar(request):
 
 
 #Event
+@staff_member_required(login_url='home')
 def add_event(request):
     submitted = False
     if request.method == "POST":
@@ -107,6 +112,7 @@ def search_event(request):
     else: 
         return render(request, 'Events/search_event.html', {})
 
+@staff_member_required(login_url='home')
 def update_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     form = EventForm(request.POST or None, request.FILES or None, instance=event)
@@ -117,6 +123,7 @@ def update_event(request, event_id):
     return render(request, 'Events/update_event.html', 
     {'event': event, 'form': form})
 
+@staff_member_required(login_url='home')
 def delete_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     event.delete()
