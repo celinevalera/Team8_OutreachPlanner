@@ -23,32 +23,33 @@
                 </div>
                 <div class="col">
                     
-                    </div>
                 </div>
             </div>
         </div>
-             <div class="container">
-                <div class="row row-cols-1 row-cols-md-3 g-3">
-                    {% for event in events %}
-                    <div class="col">
-                        <a href="{% url 'show-event' event.id %}" >
-                          <div class="card h-100 shadow rounded-4">
-                            <div class="card-header text-center">
-                            </div>
-                            <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
-                            <div class="card-body">
-                                </a><h4 class="card-title">{{ event.event_name }}</h4>
-                            </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
+        
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-3">
+                {% for event in event %}
+                <div class="col">
+                    <a href="{% url 'show-event' event.id %}" >
+                      <div class="card h-100 shadow rounded-4">
+                        <div class="card-header text-center">
+                        </div>
+                        <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                        <div class="card-body">
+                            </a><h4 class="card-title">{{ event.event_name }}</h4>
+                        </div>
+                        </div>
+                    </a>
                 </div>
+                {% endfor %}
             </div>
+        </div>
         {% else %}
             <h1><strong>Hey! You forgot to search an Event...</strong></h1> 
         {% endif %}
+    
+    <div class="container text-center"><br>Made with ❤️ by Team 8<br>
     </div>
-    <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
 </div>
 {% endblock content %}

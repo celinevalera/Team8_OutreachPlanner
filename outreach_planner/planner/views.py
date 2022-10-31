@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from .models import Event, Inbox
-from .models import Event, Venue
+from .models import Venue
 from .forms import VenueForm
 from .forms import EventForm
 
@@ -94,8 +94,8 @@ def show_event(request, event_id):
 def search_event(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        events = Event.objects.filter(event_name__contains=searched)
-        return render(request, 'Events/search_event.html', {'searched': searched, 'events': events})
+        event = Event.objects.filter(event_name__contains=searched)
+        return render(request, 'Events/search_event.html', {'searched':searched, 'event':event})
     else: 
         return render(request, 'Events/search_event.html', {})
 
