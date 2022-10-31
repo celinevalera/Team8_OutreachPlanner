@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Login {% endblock title %}
 
 {% block content %}
@@ -8,7 +10,7 @@
     background-size: cover;
     height: 100vh">
   <div class="container pt-5 pb-5">
-      <img src="https://cdn.discordapp.com/attachments/1036284643542061146/1036284721631613018/logo.png" class="mx-auto d-block" style="width:10%">
+      <img src="{% static 'logo.png' %}" class="mx-auto d-block" style="width:10%">
   </div>
   <div class = "container">
     <div class="card shadow mx-5 opacity-100 rounded-5">
