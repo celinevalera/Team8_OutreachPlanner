@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.db.models import Q
 from django.views.decorators.cache import cache_control
-from .models import Event, MessageModel, ThreadModel,Venue
-from .forms import MessageForm, VenueForm, ThreadForm
+from .models import Event,Venue
+from .forms import  VenueForm
 
 
 @login_required(login_url='/users/login_user')
