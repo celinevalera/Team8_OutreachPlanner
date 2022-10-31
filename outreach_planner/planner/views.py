@@ -14,6 +14,7 @@ def home(request):
     return render(request, 'dashboard.html', 
     {'event_list': event_list})
 
+#Venue
 def add_venue(request):
     submitted = False
     if request.method == "POST":
@@ -46,13 +47,6 @@ def search_venue(request):
     else: 
         return render(request, 'Venues/search_venue.html', {})
 
-#Inbox
-@login_required(login_url="login")
-@cache_control(no_cache=True, must_revalidate=True)
-def inbox(request):
-    email_list = Inbox.objects.all()
-    return render(request, 'inbox.html',{'email_list':email_list})
-
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     form = VenueForm(request.POST or None, instance=venue)
@@ -62,11 +56,25 @@ def update_venue(request, venue_id):
     return render(request, 'Venues/update_venue.html', 
     {'venue': venue, 'form': form})
 
+def delete_venue(request, venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    venue.delete()
+    return redirect('list-venue')
+
+#Inbox
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True)
+def inbox(request):
+    email_list = Inbox.objects.all()
+    return render(request, 'inbox.html',{'email_list':email_list})
+
 def calendar(request):
     event_list = Event.objects.all()
     return render(request, 'calendar.html',
     {'event_list': event_list})
 
+
+#Event
 def add_event(request):
     submitted = False
     if request.method == "POST":
@@ -108,3 +116,8 @@ def update_event(request, event_id):
         return redirect('show-event', event.id)
     return render(request, 'Events/update_event.html', 
     {'event': event, 'form': form})
+
+def delete_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    event.delete()
+    return redirect('list-event')

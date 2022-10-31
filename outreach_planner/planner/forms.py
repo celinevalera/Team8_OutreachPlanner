@@ -4,7 +4,6 @@ from django.forms import EmailField, EmailInput, ModelForm
 from .models import Venue
 from .models import Event
 
-#Venue Form
 class EventForm(ModelForm):
     class Meta:
         model = Event
