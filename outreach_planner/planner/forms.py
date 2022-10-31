@@ -10,11 +10,11 @@ class EventForm(ModelForm):
         model = Event
         fields = "__all__"
         labels = {
-            'event_name': '',
-            'event_date': '',
+            'event_name': 'Event Title',
+            'event_date': 'Event Date',
             'venue': 'Venue',
             'organizer': 'Organizer',
-            'description': '',
+            'description': 'Event Description',
             'volunteers': 'Attendees',
         }
         widgets = {
@@ -31,11 +31,11 @@ class VenueForm(ModelForm):
         model = Venue
         fields = "__all__"
         labels = {
-            'venue_name': '',
-            'address': '',
-            'web_link': '',
-            'phone': '',
-            'email': '',
+            'venue_name': 'Venue Name',
+            'address': 'Venue Address',
+            'web_link': 'Venue Website',
+            'phone': 'Contact Number',
+            'email': 'Contact Email',
         }
         widgets = {
             'venue_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Venue Name'}),
@@ -43,5 +43,4 @@ class VenueForm(ModelForm):
             'web_link': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Web Link'}),
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Contact Email'}),
-
         }

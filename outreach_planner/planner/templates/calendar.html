@@ -1,18 +1,37 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Calendar {% endblock title %}
 
 {% block content %}
+<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
+    no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh;">
 {% include 'navbar.html' %}
-    <br/>
-    <div class="text-center">
-        <h1>Calendar</h1>
-    </div>   
-    <br/>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for event in event_list %}
-
-            {% endfor %}
-
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col">
+            <div class="text-start">
+                <a class="btn btn-success btn-sm rounded-4"  href="{% url 'home' %}">&larr; Back</a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center">
+                <h1><strong>Calendar</strong></h1>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-end">
+                
+            </div>
+        </div>
+    </div>
+</div>
+     
+<div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+</div>
 {% endblock content %}
+
+{% include 'test_modal.html' %}

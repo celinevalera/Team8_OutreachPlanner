@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Venues {% endblock title %}
 
 {% block content %}
@@ -32,8 +34,8 @@
         <div>
             <form class="d-flex" method=POST action="{% url 'search-venue' %}">
                 {% csrf_token %}
-                <input class="form-control me-2" type="search" placeholder="Search Venues" aria-label="Search" name="searched">
-                <button class="btn btn-secondary" type="Submit">Search</button>
+                <input class="form-control me-2 rounded-4" type="search" placeholder="Search Venues" aria-label="Search" name="searched">
+                <button class="btn btn-secondary rounded-4" type="Submit">Search</button>
             </form>
         </div>
         <br>
@@ -43,9 +45,7 @@
             <div class="col">
                 <a href="{% url 'show-venue' venue.id %}" >
               <div class="card h-100 shadow rounded-4">
-                <div class="card-header text-center">
-                </div>
-                <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
                 <div class="card-body">
                     </a><h4 class="card-title">{{ venue.venue_name }}</h4>
                 </div>

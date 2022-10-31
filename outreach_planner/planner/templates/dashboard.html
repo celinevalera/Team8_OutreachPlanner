@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Dashboard {% endblock title %}
 
 {% block content %}
@@ -20,7 +22,7 @@
               <div class="card-header text-center">
                     {{ event.event_date.date }}
                   </div>
-                <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
                 <div class="card-body">
                     <h4 class="card-title">{{ event.event_name }}</h4>
                     <p class="card-text">
@@ -28,7 +30,7 @@
                             <strong>Time:</strong> {{ event.event_date.time }} <br/>
                         </div>
                         <div class="text-truncate">
-                            <strong>Event Organizer:</strong> {% for user in event.organizer.all %} {{ user }}, {% endfor %}
+                            <strong>Event Organizer/s:</strong> {% for user in event.organizer.all %} {{ user }}, {% endfor %}
                         </div>
                         <div class="text-truncate">
                             <strong>Description:</strong> {{ event.description }} <br/>
