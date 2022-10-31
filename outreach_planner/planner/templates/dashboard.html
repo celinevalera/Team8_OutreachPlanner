@@ -14,6 +14,7 @@
         <h1><strong>Dashboard</strong></h1>
     </div>
     <div class="container">
+        {% if event_list %}
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for event in event_list %}
             <div class="col">
@@ -46,7 +47,12 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="text-center text-muted py-5">
+            <em>Nothing to show for now!</em>
+        </div>
+        {% endif %}
     </div>
-    <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+    <div class="container text-center py-3"><br>Made with ❤️ by Team 8<br></div>
 </div>
 {% endblock content %}

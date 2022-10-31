@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Search Results for {{ searched }} {% endblock title %}
 
 {% block content %}
@@ -8,49 +10,79 @@
     background-size: cover;
     min-height: 100vh;">
 {% include 'navbar.html' %}
-        {% if searched %}
-            <div class="container">
-                <div class="row align-items-center py-5">
-                    <div class="col">
-                        <div class="text-start">
-                            <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="text-center">
-                            <h1>Search Results for <strong>{{ searched }}</strong></h1> 
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="text-end">
-                            <a class="btn btn-success btn-sm rounded-4" href="{% url 'add-venue' %}">+ Add a Venue</a>
-                        </div>
-                    </div>
-                </div>
+{% if searched %}
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col">
+            <div class="text-start">
+                <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
             </div>
-
-             <div class="container">
-                <div class="row row-cols-1 row-cols-md-3 g-3">
-                    {% for venue in venues %}
-                    <div class="col">
-                        <a href="{% url 'show-venue' venue.id %}" >
-                          <div class="card h-100 shadow rounded-4">
-                            <div class="card-header text-center">
-                            </div>
-                            <img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
-                            <div class="card-body">
-                                </a><h4 class="card-title">{{ venue.venue_name }}</h4>
-                            </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
+        </div>
+        <div class="col">
+            <div class="text-center">
+                <h1>Search Results for <strong>{{ searched }}</strong></h1> 
             </div>
-        {% else %}
-            <h1><strong>Hey! You Forgot to Search a Venue...</strong></h1> 
-        {% endif %}
-    <div class="container text-center"><br>Made with ❤️ by Team 8<br>
+        </div>
+        <div class="col">
+            
+        </div>
     </div>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        {% for venue in venues %}
+        <div class="col">
+            <a href="{% url 'show-venue' venue.id %}" >
+              <div class="card h-100 shadow rounded-4">
+                {% if venue.venue_image %}
+                <img src="{{ venue.venue_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                {% else %}
+                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    </a><h4 class="card-title">{{ venue.venue_name }}</h4>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col">
+            <div class="text-start">
+                <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center">
+                <h1>Search Results for <strong>NOTHING!</strong></h1> 
+            </div>
+        </div>
+        <div class="col">
+            
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="card h-100 shadow rounded-4">
+                <div class="card-body text-center">
+                    You forgot to search something!
+                </div>
+            </div>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="container text-center"><br>Made with ❤️ by Team 8<br>
+</div>
 </div>
 {% endblock content %}
