@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Search Results for {{ searched }} {% endblock title %}
 
 {% block content %}
@@ -13,7 +15,7 @@
             <div class="row align-items-center py-5">
                 <div class="col">
                     <div class="text-start">
-                        <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                        <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
                     </div>
                 </div>
                 <div class="col">
@@ -25,6 +27,30 @@
                     
                 </div>
             </div>
+<<<<<<< HEAD
+             <div class="container">
+                <div class="row row-cols-1 row-cols-md-3 g-3">
+                    {% for event in events %}
+                    <div class="col">
+                        <a href="{% url 'show-event' event.id %}" >
+                          <div class="card h-100 shadow rounded-4">
+                            {% if event.event_image %}
+                            <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                            {% else %}
+                            <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                            {% endif %}
+                            <div class="card-body">
+                                </a><h4 class="card-title">{{ event.event_name }}</h4>
+                            </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+        {% else %}
+            <h1><strong>Hey! You forgot to search an Event...</strong></h1> 
+        {% endif %}
+    <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
+=======
         </div>
         
         <div class="container">
@@ -51,5 +77,6 @@
     
     <div class="container text-center"><br>Made with ❤️ by Team 8<br>
     </div>
+>>>>>>> e14d0f358fa5c8ed5758db8497a9a20803d56892
 </div>
 {% endblock content %}

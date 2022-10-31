@@ -26,7 +26,7 @@ def logout_user(request):
 
 def register_user(request):
     if request.method == "POST":
-        form = RegisterUserForm(request.POST)
+        form = RegisterUserForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             username=form.cleaned_data['username']

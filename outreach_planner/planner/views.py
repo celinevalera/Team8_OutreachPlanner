@@ -18,7 +18,7 @@ def home(request):
 def add_venue(request):
     submitted = False
     if request.method == "POST":
-        form = VenueForm(request.POST)
+        form = VenueForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_venue?submitted=True')
@@ -49,7 +49,7 @@ def search_venue(request):
 
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
-    form = VenueForm(request.POST or None, instance=venue)
+    form = VenueForm(request.POST or None, request.FILES or None, instance=venue)
     if form.is_valid():
         form.save()
         return redirect('show-venue', venue.id)
@@ -78,7 +78,7 @@ def calendar(request):
 def add_event(request):
     submitted = False
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_event?submitted=True')
@@ -109,7 +109,7 @@ def search_event(request):
 
 def update_event(request, event_id):
     event = Event.objects.get(pk=event_id)
-    form = EventForm(request.POST or None, instance=event)
+    form = EventForm(request.POST or None, request.FILES or None, instance=event)
     if form.is_valid():
         form.save(commit=False)
         form.save()

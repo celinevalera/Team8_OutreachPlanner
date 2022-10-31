@@ -12,7 +12,7 @@
         <div class="row align-items-center py-5">
             <div class="col">
                 <div class="text-start">
-                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'show-venue' venue.id %}">&larr; Back</a>
+                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'show-venue' venue.id %}">&larr; Back</a>
                 </div>
             </div>
             <div class="col">
@@ -29,22 +29,23 @@
     </div>
 
     <div class="container">
-              <div class="card h-100 shadow rounded-4">
-                <div class="card-header text-center">
-                    <h5><strong>Venue Details</strong></h5>
-                  </div>
-                <!--<img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">-->
-                <div class="card-body text-center">
-                    <p class="card-text">
-                        <form action="" method=POST>
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <br>
-                            <input type="submit" value="Update" class="btn btn-secondary">
-                        </form>
-                    </p>
-              </div>
+        <div class="card h-100 shadow rounded-4">
+            <div class="card-body">
+                {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible fade show rounded-4" role="alert">
+                    Invalid input. Please try again.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label = "Close"></button>
+                </div>
+                {% endif %}
+                <div class="text-truncate text-center pb-3 px-3">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Submit" class="btn btn-success rounded-4">
+                    </form>
+                </div>
             </div>
+        </div>
     </div>
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
 </div>

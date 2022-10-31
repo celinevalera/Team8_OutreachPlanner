@@ -45,7 +45,11 @@
             <div class="col">
             <a href="{% url 'show-event' event.id %}" >
               <div class="card h-100 shadow rounded-4">
+                {% if event.event_image %}
+                <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                {% else %}
                 <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                {% endif %}
                 <div class="card-body">
                     </a><h4 class="card-title">{{ event.event_name }}</h4>
                 </div>

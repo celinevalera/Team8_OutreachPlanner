@@ -12,6 +12,7 @@ class Venue(models.Model):
     web_link = models.URLField('Event Link', blank=True)
     phone = models.PositiveIntegerField('Contact Number')
     email = models.EmailField('Contact Email', blank=True)
+    venue_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return self.venue_name
@@ -32,6 +33,7 @@ class Event(models.Model):
     organizer = models.ManyToManyField(User, blank=True)
     description = models.TextField(blank=True)
     volunteers = models.ManyToManyField(Volunteer, blank=True)
+    event_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return self.event_name

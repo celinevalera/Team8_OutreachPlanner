@@ -22,7 +22,11 @@
               <div class="card-header text-center">
                     {{ event.event_date.date }}
                   </div>
-                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                {% if event.event_image %}
+                <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm " height="1920px" width="1080px" alt="...">
+                {% else %}
+                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm " height="1920px" width="1080px" alt="...">
+                {% endif %}
                 <div class="card-body">
                     <h4 class="card-title">{{ event.event_name }}</h4>
                     <p class="card-text">

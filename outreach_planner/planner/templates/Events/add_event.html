@@ -12,7 +12,7 @@
         <div class="row align-items-center py-5">
             <div class="col">
                 <div class="text-start">
-                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                    <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
                 </div>
             </div>
             <div class="col">
@@ -59,7 +59,7 @@
                 </div>
                 {% endif %}
                 <div class="text-truncate text-center pb-3 px-3">
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <input type="submit" value="Submit" class="btn btn-success rounded-4">
