@@ -8,13 +8,20 @@ from .models import Venue
 from .forms import VenueForm
 from .forms import EventForm
 
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+
 @login_required(login_url='/users/login_user')
 def home(request):
     event_list = Event.objects.all().order_by('event_date')
     return render(request, 'dashboard.html', 
     {'event_list': event_list})
 
-#Venue
+#   Venue
 def add_venue(request):
     submitted = False
     if request.method == "POST":
@@ -61,7 +68,7 @@ def delete_venue(request, venue_id):
     venue.delete()
     return redirect('list-venue')
 
-#Inbox
+#   Inbox
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True)
 def inbox(request):
@@ -74,7 +81,7 @@ def calendar(request):
     {'event_list': event_list})
 
 
-#Event
+#   Event
 def add_event(request):
     submitted = False
     if request.method == "POST":
@@ -121,3 +128,51 @@ def delete_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     event.delete()
     return redirect('list-event')
+
+
+#   Generate PDF File Event Summary
+def event_pdf(request, event_id):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+
+    #   content of canvas
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont('Helvetica', 12)
+
+    #   Designate model
+    event = Event.objects.get(pk=event_id)
+
+    #   render to pdf
+    lines = []
+
+    lines.append(event.event_name)
+    lines.append(event.event_date)
+    
+    lines.append(event.venue.venue_name)
+    lines.append(event.venue.address)
+    lines.append(event.venue.web_link)
+    lines.append(event.venue.phone)
+    lines.append(event.venue.email)
+
+    for user in event.organizer.all():
+        lines.append(user.first_name + " " + user.last_name)
+        lines.append(user.email)
+
+    lines.append(event.description)
+    
+    for user in event.volunteers.all():
+        lines.append(user.first_name + " " + user.last_name)
+        lines.append(user.email)
+    
+    for line in lines:
+        line = str(line)
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename=(event.event_name + "-Event-Summary.pdf"))
+
