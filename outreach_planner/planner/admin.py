@@ -7,12 +7,8 @@ from .models import Venue
 from .models import Volunteer
 from .models import Event
 
-from .models import ThreadModel
-from .models import MessageModel
-
 admin.site.register(Volunteer)
-admin.site.register(ThreadModel)
-admin.site.register(MessageModel)
+
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):
