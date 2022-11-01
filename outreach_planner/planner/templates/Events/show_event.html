@@ -21,12 +21,11 @@
                 </div>
             </div>
             <div class="col">
+                {% if request.user.is_staff %}
                 <div class="text-end">
-                    {% if request.user.is_staff %}
                     <div class="pb-2">
-                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a></div>
-                    <div>
-                        <button type="button"class="btn btn-danger btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#confirmation">
+                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a>
+                    <button type="button"class="btn btn-danger btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#confirmation">
                             Delete Event</button></div>
                     {% endif %}
                 </div>
