@@ -83,7 +83,11 @@
             <th><h2>Organizer:</h2></th>
             <td colspan="2">
               {% for user in event.organizer.all %} 
-                {{ user.first_name }} {{ user.last_name }} <br> {{ user.email }}
+                <br>
+                {{ user.first_name }} {{ user.last_name }} 
+                <br> 
+                {{ user.email }}
+                <br>
               {% endfor %}
             </td>
 
@@ -93,7 +97,7 @@
             <th><h2>Attendees:</h2></th>
             <td colspan="2">
               {% for user in event.volunteers.all %} 
-               <br>
+                <br>
                 {{ user.first_name }} {{ user.last_name }} 
                 <br> 
                 {{ user.email }}
