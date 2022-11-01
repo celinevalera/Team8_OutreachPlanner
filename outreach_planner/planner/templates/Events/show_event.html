@@ -12,7 +12,7 @@
         <div class="row align-items-center py-5">
             <div class="col">
                 <div class="text-start">
-                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                    <a class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</a>
                 </div>
             </div>
             <div class="col">
@@ -27,8 +27,8 @@
                     <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a>
                     <button type="button"class="btn btn-danger btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#confirmation">
                             Delete Event</button></div>
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -48,27 +48,35 @@
                             <strong>Venue:</strong> {{ event.venue }}
                         </div>
                         <div class="text-truncate">
-                            <strong>Organizer:</strong> {% for user in event.organizer.all %} {{ user }}, {% endfor %} <br/>
+                            <strong>Organizer:</strong> 
+                            {% for user in event.organizer.all %} 
+                            {% if user.first_name %}
+                                {{ user.first_name }} {{user.last_name}},
+                            {% else %}
+                                [Redacted],
+                            {% endif %}
+                            {% endfor %} <br/>
+                        </div>
+                        <div class="">
+                            <strong>Description:</strong><br> {{ event.description }} <br/>
                         </div>
                         <div class="text-truncate">
-                            <strong>Description:</strong> {{ event.description }} <br/>
-                        </div>
-                        <div class="text-truncate">
-                            <strong>Volunteers:</strong><br> {% for user in event.volunteers.all %} {{ user }}<br> {% endfor %} <br/>
+                            <strong>Volunteers:</strong><br> 
+                            {% for user in event.volunteers.all %} 
+                            {% if user.first_name %}
+                                {{ user.first_name }} {{user.last_name}}<br> 
+                            {% else %}
+                                [Redacted]<br>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </p>
                 </div>
                 <div>
-                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'registration-confirmation' event.id %}">Join Event</a>
-                </div>
-                <div class="users--lists section">
-                    {% for volunteers in event.volunteers.all %}
-                        <div class="wrapper--user">
-                                
-                            <p>{{user.name}}</p>
-                        
-                        </div>
-                    {% endfor %}
+                    <div class="text-end px-3 py-3">
+                        <a class="btn btn-info btn-sm rounded-4" href="{% url 'event-pdf' event.id %}">Print to PDF</a>
+                        <a class="btn btn-success btn-sm rounded-4" href="{% url 'registration-confirmation' event.id %}">Join Event</a>
+                    </div>
                 </div>
             </div>
     </div>

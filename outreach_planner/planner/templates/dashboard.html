@@ -18,7 +18,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for event in event_list %}
             <div class="col">
-            <!--<a href="{% url 'show-event' event.id %}" class="stretched-link"></a>-->
+            <a href="{% url 'show-event' event.id %}" class="text-muted text-decoration-none">
               <div class="card h-100 shadow rounded-4">
               <div class="card-header text-center">
                     {{ event.event_date.date }}
@@ -28,6 +28,7 @@
                 {% else %}
                 <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm " height="1920px" width="1080px" alt="...">
                 {% endif %}
+                </a>
                 <div class="card-body">
                     <h4 class="card-title">{{ event.event_name }}</h4>
                     <p class="card-text">
@@ -35,7 +36,14 @@
                             <strong>Time:</strong> {{ event.event_date.time }} <br/>
                         </div>
                         <div class="text-truncate">
-                            <strong>Event Organizer/s:</strong> {% for user in event.organizer.all %} {{ user }}, {% endfor %}
+                            <strong>Event Organizer/s:</strong>
+                            {% for user in event.organizer.all %} 
+                            {% if user.first_name %}
+                                {{ user.first_name }} {{user.last_name}},
+                            {% else %}
+                                [Redacted],
+                            {% endif %}
+                            {% endfor %} <br/>
                         </div>
                         <div class="text-truncate">
                             <strong>Description:</strong> {{ event.description }} <br/>

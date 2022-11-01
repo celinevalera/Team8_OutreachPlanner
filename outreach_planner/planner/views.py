@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import cache_control
-from .models import Event,Venue,Inbox
+from .models import Event,Venue
 from .forms import VenueForm,EventForm
 
 
