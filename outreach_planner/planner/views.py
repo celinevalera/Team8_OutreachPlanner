@@ -4,10 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import cache_control
-from .models import Event, Inbox
-from .models import Venue
-from .forms import VenueForm
-from .forms import EventForm
+from .models import Event,Venue
+from .forms import VenueForm,EventForm
+
 
 @login_required(login_url='/users/login_user')
 def home(request):
@@ -65,13 +64,6 @@ def delete_venue(request, venue_id):
     venue.delete()
     return redirect('list-venue')
 
-#Inbox
-@login_required(login_url="login")
-@cache_control(no_cache=True, must_revalidate=True)
-def inbox(request):
-    email_list = Inbox.objects.all()
-    return render(request, 'inbox.html',{'email_list':email_list})
-
 def calendar(request):
     event_list = Event.objects.all()
     return render(request, 'calendar.html',
@@ -128,3 +120,13 @@ def delete_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     event.delete()
     return redirect('list-event')
+
+
+#newly added 
+@login_required(login_url='/login')
+def registration_confirmation(request,event_id):
+    event = Event.objects.get(pk=event_id)
+    if request.method == "POST":
+        event.volunteers.add(request.user)
+        return redirect('list-event')
+    return render(request, 'Events/registration_confirmation.html',{'event':event})
