@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import cache_control
@@ -8,6 +8,10 @@ from .models import Event, Inbox
 from .models import Venue
 from .forms import VenueForm
 from .forms import EventForm
+
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+
 
 @login_required(login_url='/users/login_user')
 def home(request):
@@ -65,7 +69,7 @@ def delete_venue(request, venue_id):
     venue.delete()
     return redirect('list-venue')
 
-#Inbox
+#   Inbox
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True)
 def inbox(request):
@@ -128,3 +132,25 @@ def delete_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     event.delete()
     return redirect('list-event')
+
+
+#   Generate PDF File Event Summary
+def event_pdf(request, event_id):
+    event = Event.objects.get(pk=event_id)
+
+    template_path = 'Events/pdfSummary.html'
+    context = {'event': event}
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="event-summary.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+   
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+

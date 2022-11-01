@@ -1,0 +1,121 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'logo-sm.png' %}"/>
+      <title>{{ event.event_name }} Summary</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        
+      }
+
+      th, td {
+        text-align: justify;
+        padding: 2px;
+        margin: auto;
+        
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <div>
+      <div>
+        <h1> {{ event.event_name }} Event Summary</h1>
+      </div>
+      <table>
+        <thead>
+          <h2> Event Details </h2>
+        </thead>
+        <tbody>
+          <tr>
+            <th><h2>What:</h2></th>
+            <td colspan="2">{{ event.event_name }}</td>
+          </tr>
+
+          <tr>
+            <th><h2>When:</h2></th>
+            <td colspan="2"> {{ event.event_date }}</td>
+          </tr>
+
+          <tr>
+            <th rowspan="5"><h2>Where:</h2></th>
+            <td colspan="2"><center><h3>Venue Details</h3></center>
+              <tr>
+                <th>Venue Name:</th>
+                <td>{{ event.venue.venue_name }}</td>
+              </tr>
+              <tr>
+                <th>Address:</th>
+                <td>{{ event.venue.address }}</td>
+              </tr>
+              <tr>
+                <th>URL:</th>
+                <td>{{ event.venue.web_link }}</td>
+              </tr>
+              <tr>
+                  <th>Contact Details:</th>
+                  <td>{{ event.venue.phone }}, {{ event.venue.email }}</td>
+              </tr>
+            </td>
+          </tr>
+
+          <tr>
+            <th><h2>Description:</h2></th>
+            <td colspan="2"> {{ event.description }}</td>
+          <tr>
+            <th><h2>Organizer:</h2></th>
+            <td colspan="2">
+              {% for user in event.organizer.all %} 
+                <br>
+                {{ user.first_name }} {{ user.last_name }} 
+                <br> 
+                {{ user.email }}
+                <br>
+              {% endfor %}
+            </td>
+
+          </tr>
+
+          <tr>
+            <th><h2>Attendees:</h2></th>
+            <td colspan="2">
+              {% for user in event.volunteers.all %} 
+                <br>
+                {{ user.first_name }} {{ user.last_name }} 
+                <br> 
+                {{ user.email }}
+                <br>
+              {% endfor %}
+              
+            </td>
+            
+            
+          </tr>
+          
+        </tbody>
+      </table>
+
+      <div>
+        <h4>Made with ❤ by Team 8</h4>
+      </div>
+      
+    </div>  
+  </body>
+</html>
