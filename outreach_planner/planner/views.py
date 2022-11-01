@@ -68,12 +68,7 @@ def delete_venue(request, venue_id):
     venue.delete()
     return redirect('list-venue')
 
-#   Inbox
-@login_required(login_url="login")
-@cache_control(no_cache=True, must_revalidate=True)
-def inbox(request):
-    email_list = Inbox.objects.all()
-    return render(request, 'inbox.html',{'email_list':email_list})
+
 
 def calendar(request):
     event_list = Event.objects.all()
