@@ -22,7 +22,13 @@
             </div>
             <div class="col">
                 <div class="text-end">
-                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a>
+                    {% if request.user.is_staff %}
+                    <div class="pb-2">
+                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a></div>
+                    <div>
+                        <button type="button"class="btn btn-danger btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#confirmation">
+                            Delete Event</button></div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -33,7 +39,6 @@
                 <div class="card-header text-center">
                     <strong>Event Details</strong>
                   </div>
-                <!--<img src="https://cdn.discordapp.com/attachments/1021257672454066207/1028878266553073664/gantt.png" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">-->
                 <div class="card-body">
                     <h4 class="card-title"></h4>
                     <p class="card-text">
@@ -58,4 +63,24 @@
     </div>
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="confirmationLabel">Confirmation</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete <strong>{{ event.event_name}}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary rounded-4" data-bs-dismiss="modal">Close</button>
+          <a class="btn btn-danger rounded-4" href="{% url 'delete-event' event.id %}">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock content %}

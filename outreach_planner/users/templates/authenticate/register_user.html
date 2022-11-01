@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+
 {% block title %} Registration {% endblock title %}
 
 {% block content %}
@@ -8,51 +11,30 @@
     background-size: cover;
     height: 100vh">
   <div class="container pt-5 pb-5">
-    <img src="https://cdn.discordapp.com/attachments/1036284643542061146/1036284721631613018/logo.png" class="mx-auto d-block" style="width:10%">
+    <img src="{% static 'logo.png' %}" class="mx-auto d-block" style="width:10%">
   </div>
-  <div class = "container">
+  <div class="container">
     <div class="card shadow mx-5 opacity-100 rounded-5">
         <div class="card-body">
-          {% if form.errors %}
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              Invalid input. Please try again.
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label = "Close"></button>
-          </div>
-          {% endif %}
-        <form action="" method=POST>
-            {% csrf_token %}
-            {{ form.as_p }}
-         <!-- <div class="mb-3 mx-5 mt-3">
-            <label for="input_email" class="form-label">Username</label>
-            <input type="text" class="form-control rounded-4" name="username" >
-          </div>
-          <div class="mb-3 mx-5 mt-3">
-            <label for="input_email" class="form-label">First Name</label>
-            <input type="text" class="form-control rounded-4" name="first_name">
-          </div>
-          <div class="mb-3 mx-5 mt-3">
-            <label for="input_email" class="form-label">Last Name</label>
-            <input type="text" class="form-control rounded-4" name="last_name" >
-          </div>
-          <div class="mb-3 mx-5 mt-3">
-            <label for="input_email" class="form-label">Email</label>
-            <input type="email" class="form-control rounded-4" name="email" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3 mx-5">
-            <label for="input_email" class="form-label">Password</label>
-            <input type="password" class="form-control rounded-4" name="password">
-          </div>
-          <div class="mb-3 mx-5">
-            <label for="input_email" class="form-label">Retry Password</label>
-            <input type="password" class="form-control rounded-4" name="password">
-          </div>
-          <br>-->
-          <div class = "text-center">
-            <div class = "text-center">
-              <button type="submit" class="btn btn-primary rounded-4">Sign me up!</button>
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show rounded-4" role="alert">
+                Invalid input. Please try again.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label = "Close"></button>
             </div>
-          </div>
-        </form>
+            {% endif %}
+            <div class="text-truncate text-center pb-3 px-3">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <!--{% for input in form %}
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">{{input.label}}</span>
+                      {{input}}
+                    </div>
+                    {% endfor %}-->
+                    <input type="submit" value="Sign me Up!" class="btn btn-success rounded-4">
+                </form>
+            </div>
         </div>
     </div>
   </div>

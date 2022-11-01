@@ -4,7 +4,6 @@ from django.forms import EmailField, EmailInput, ModelForm
 from .models import Venue
 from .models import Event
 
-#Venue Form
 class EventForm(ModelForm):
     class Meta:
         model = Event
@@ -16,6 +15,7 @@ class EventForm(ModelForm):
             'organizer': 'Organizer',
             'description': 'Event Description',
             'volunteers': 'Attendees',
+            'event_image': 'Venue Image',
         }
         widgets = {
             'event_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Event Name'}),
@@ -36,6 +36,7 @@ class VenueForm(ModelForm):
             'web_link': 'Venue Website',
             'phone': 'Contact Number',
             'email': 'Contact Email',
+            'venue_image': 'Venue Image',
         }
         widgets = {
             'venue_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Venue Name'}),
@@ -43,4 +44,5 @@ class VenueForm(ModelForm):
             'web_link': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Web Link'}),
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Contact Email'}),
+            
         }
