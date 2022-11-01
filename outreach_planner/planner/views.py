@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from .models import Event, Inbox
@@ -8,11 +8,8 @@ from .models import Venue
 from .forms import VenueForm
 from .forms import EventForm
 
-from django.http import FileResponse
-import io
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
+from xhtml2pdf import pisa
+from django.template.loader import get_template
 
 
 @login_required(login_url='/users/login_user')
@@ -132,47 +129,21 @@ def delete_event(request, event_id):
 
 #   Generate PDF File Event Summary
 def event_pdf(request, event_id):
-    buf = io.BytesIO()
-    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-
-    #   content of canvas
-    textob = c.beginText()
-    textob.setTextOrigin(inch, inch)
-    textob.setFont('Helvetica', 12)
-
-    #   Designate model
     event = Event.objects.get(pk=event_id)
 
-    #   render to pdf
-    lines = []
-
-    lines.append(event.event_name)
-    lines.append(event.event_date)
+    template_path = 'Events/pdfSummary.html'
+    context = {'event': event}
     
-    lines.append(event.venue.venue_name)
-    lines.append(event.venue.address)
-    lines.append(event.venue.web_link)
-    lines.append(event.venue.phone)
-    lines.append(event.venue.email)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="event-summary.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
 
-    for user in event.organizer.all():
-        lines.append(user.first_name + " " + user.last_name)
-        lines.append(user.email)
-
-    lines.append(event.description)
+   
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
     
-    for user in event.volunteers.all():
-        lines.append(user.first_name + " " + user.last_name)
-        lines.append(user.email)
-    
-    for line in lines:
-        line = str(line)
-        textob.textLine(line)
-
-    c.drawText(textob)
-    c.showPage()
-    c.save()
-    buf.seek(0)
-
-    return FileResponse(buf, as_attachment=True, filename=(event.event_name + "-Event-Summary.pdf"))
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
