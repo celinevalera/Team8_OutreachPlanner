@@ -16,7 +16,12 @@
       h1 {
         font-size: 20px;
       }
-
+      table {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left:auto;
+        margin-right:auto;
+      }
       
       table, th, td {
         border: 1px solid black;
@@ -28,7 +33,14 @@
         text-align: justify;
         padding: 2px;
         margin: auto;
-        
+      }
+
+      th {
+        width:30%;
+      }
+
+      td {
+        width: 70%;
       }
     </style>
   </head>
@@ -39,7 +51,7 @@
       <div>
         <h1> {{ event.event_name }} Event Summary</h1>
       </div>
-      <table>
+      <table width="600">
         <thead>
           <h2> Event Details </h2>
         </thead>
@@ -103,10 +115,7 @@
                 {{ user.email }}
                 <br>
               {% endfor %}
-              
             </td>
-            
-            
           </tr>
           
         </tbody>
