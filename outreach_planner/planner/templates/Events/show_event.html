@@ -34,10 +34,10 @@
     </div>
 
     <div class="container">
-              <div class="card h-100 shadow rounded-4">
+            <div class="card h-100 shadow rounded-4">
                 <div class="card-header text-center">
                     <strong>Event Details</strong>
-                  </div>
+                </div>
                 <div class="card-body">
                     <h4 class="card-title"></h4>
                     <p class="card-text">
@@ -57,12 +57,19 @@
                             <strong>Volunteers:</strong><br> {% for user in event.volunteers.all %} {{ user }}<br> {% endfor %} <br/>
                         </div>
                     </p>
-                    <div>
-                        <div class="text-end">
-                            <a class="btn btn-info btn-sm rounded-4" href="{% url 'event-pdf' event.id %}">Print to PDF</a>
+                </div>
+                <div>
+                    <a class="btn btn-success btn-sm rounded-4" href="{% url 'registration-confirmation' event.id %}">Join Event</a>
+                </div>
+                <div class="users--lists section">
+                    {% for volunteers in event.volunteers.all %}
+                        <div class="wrapper--user">
+                                
+                            <p>{{user.name}}</p>
+                        
                         </div>
-                    </div>
-              </div>
+                    {% endfor %}
+                </div>
             </div>
     </div>
     <div class="container text-center"><br>Made with ❤️ by Team 8<br></div>

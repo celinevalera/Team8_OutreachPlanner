@@ -4,10 +4,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import cache_control
-from .models import Event, Inbox
-from .models import Venue
-from .forms import VenueForm
-from .forms import EventForm
+from .models import Event,Venue,Inbox
+from .forms import VenueForm,EventForm
+
 
 from xhtml2pdf import pisa
 from django.template.loader import get_template
@@ -132,6 +131,17 @@ def delete_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     event.delete()
     return redirect('list-event')
+
+
+#newly added 
+@login_required(login_url='/login')
+def registration_confirmation(request,event_id):
+    event = Event.objects.get(pk=event_id)
+    if request.method == "POST":
+        event.volunteers.add(request.user)
+        return redirect('list-event')
+    return render(request, 'Events/registration_confirmation.html',{'event':event})
+
 
 
 #   Generate PDF File Event Summary

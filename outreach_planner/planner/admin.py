@@ -6,10 +6,12 @@ from django.contrib import admin
 from .models import Venue
 from .models import Volunteer
 from .models import Event
-from .models import Inbox
+
+
 
 admin.site.register(Volunteer)
-admin.site.register(Inbox)
+
+
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):
@@ -19,7 +21,7 @@ class VenueAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    fields = (('event_name', 'venue'), "event_date", "description", "organizer")
+    fields = (('event_name', 'venue'), "event_date", "description", "organizer","volunteers")
     list_display = ('event_name', 'event_date', 'venue')
     list_filter = ('event_date', 'venue')
     ordering = ('-event_date',)

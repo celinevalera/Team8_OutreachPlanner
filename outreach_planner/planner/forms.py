@@ -1,8 +1,8 @@
 from django import forms
 from django import forms
 from django.forms import EmailField, EmailInput, ModelForm
-from .models import Venue
-from .models import Event
+from .models import Venue,Event
+
 
 class EventForm(ModelForm):
     class Meta:
