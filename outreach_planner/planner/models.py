@@ -46,4 +46,18 @@ class Event(models.Model):
     def __str__(self):
         return self.event_name
 
+<<<<<<< HEAD
 
+=======
+class Inbox(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
+    subject = models.CharField(max_length=500, blank=True, null = True)
+    body = models.TextField(max_length=1000, blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.user.first_name+' '+self.user.last_name
+>>>>>>> cee8f0237a36009a3b43a120ad0fc1c9031b59d5
