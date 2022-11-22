@@ -19,7 +19,7 @@ class EventForm(ModelForm):
         }
         widgets = {
             'event_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Event Name'}),
-            'event_date': forms.DateField(widget=AdminSplitDateTime() attrs={'class': 'form-control', 'placeholder': 'Date'}),
+            'event_date': forms.DateField(widget=AdminSplitDateTime()),
             'venue': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Venue'}),
             'organizer': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Organizer'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
