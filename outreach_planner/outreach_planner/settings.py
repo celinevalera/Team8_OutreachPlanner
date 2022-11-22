@@ -122,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_ROOT = '/media/'
-STATIC_ROOT = '/home/upoutreach/Team8_OutreachPlanner/outreach_planner/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
