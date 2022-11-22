@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@_xqb*www6s!^&xl%c#%2@7rf*-*gd@e(q_!ur8e#wnnfwynj1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["upoutreach.pythonanywhere.com", '127.0.0.1']
 
 
 # Application definition
@@ -123,13 +123,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_ROOT = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-    )
 
 
 # Default primary key field type
