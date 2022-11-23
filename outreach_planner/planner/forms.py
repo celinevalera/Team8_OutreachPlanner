@@ -2,7 +2,7 @@ from django import forms
 from django import forms
 from django.forms import EmailField, EmailInput, ModelForm
 from .models import Venue,Event
-from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
+
 
 class EventForm(ModelForm):
     class Meta:
@@ -10,7 +10,7 @@ class EventForm(ModelForm):
         fields = "__all__"
         labels = {
             'event_name': 'Event Title',
-            'event_date': 'Event Date/Time',
+            'event_date': 'Event Date',
             'venue': 'Venue',
             'organizer': 'Organizer',
             'description': 'Event Description',
@@ -19,7 +19,7 @@ class EventForm(ModelForm):
         }
         widgets = {
             'event_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Event Name'}),
-            'event_date': forms.DateField(widget=AdminSplitDateTime()),
+            'event_date': forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'Event Date'}),
             'venue': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Venue'}),
             'organizer': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Organizer'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),

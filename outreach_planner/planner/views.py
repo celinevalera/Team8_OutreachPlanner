@@ -23,6 +23,7 @@ def home(request):
 @staff_member_required(login_url='home')
 def add_venue(request):
     submitted = False
+    
     if request.method == "POST":
         form = VenueForm(request.POST, request.FILES)
         if form.is_valid():
