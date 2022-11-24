@@ -13,7 +13,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 @login_required
-def Inbox(request):
+def inbox(request):
 	messages = Message.get_messages(user=request.user)
 	active_direct = None
 	directs = None
@@ -33,12 +33,12 @@ def Inbox(request):
 		'active_direct': active_direct,
 		}
 
-	template = loader.get_template('direct/direct.html')
+	template = loader.get_template('direct/inbox.html')
 
 	return HttpResponse(template.render(context, request))
 
 @login_required
-def UserSearch(request):
+def user_search(request):
 	query = request.GET.get("q")
 	context = {}
 	
@@ -59,7 +59,7 @@ def UserSearch(request):
 	return HttpResponse(template.render(context, request))
 
 @login_required
-def Directs(request, username):
+def directs(request, username):
 	user = request.user
 	messages = Message.get_messages(user=user)
 	active_direct = username
@@ -81,7 +81,7 @@ def Directs(request, username):
 
 
 @login_required
-def NewConversation(request, username):
+def new_conversation(request, username):
 	from_user = request.user
 	body = ''
 	try:
@@ -89,11 +89,28 @@ def NewConversation(request, username):
 	except Exception as e:
 		return redirect('usersearch')
 	if from_user != to_user:
-		Message.send_message(from_user, to_user, body)
+		user = request.user
+		messages = Message.get_messages(user=user)
+		active_direct = username
+		directs = Message.objects.filter(user=user, recipient__username=username)
+		directs.update(is_read=True)
+		for message in messages:
+			if message['user'].username == username:
+				message['unread'] = 0
+
+		context = {
+			'directs': directs,
+			'messages': messages,
+			'active_direct':active_direct,
+		}
+
+		template = loader.get_template('direct/direct.html')
+
+		return HttpResponse(template.render(context, request))
 	return redirect('inbox')
 
 @login_required
-def SendDirect(request):
+def senddirect(request):
 	from_user = request.user
 	to_user_username = request.POST.get('to_user')
 	body = request.POST.get('body')
@@ -101,11 +118,11 @@ def SendDirect(request):
 	if request.method == 'POST':
 		to_user = User.objects.get(username=to_user_username)
 		Message.send_message(from_user, to_user, body)
-		return redirect('inbox')
+		return redirect('directs', to_user_username)
 	else:
 		HttpResponseBadRequest()
 
-def checkDirects(request):
+def check_directs(request):
 	directs_count = 0
 	if request.user.is_authenticated:
 		directs_count = Message.objects.filter(user=request.user, is_read=False).count()

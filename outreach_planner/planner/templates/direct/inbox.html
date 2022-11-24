@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Inbox {% endblock title %}
+
+{% block content %}
+<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
+    no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh;">
+{% include 'navbar.html' %}
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col">
+            <div class="text-start">
+                <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center">
+                <h1><strong>Inbox</strong></h1>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-end">
+                <a class="btn btn-success btn-sm rounded-4" href="{% url 'usersearch' %}">Compose Message</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class = "container">
+    <div class="card shadow mx-5 opacity-100 rounded-5">
+        <div class="card-body">
+            {% for message in messages %}
+            <div class="card my-2 mx-5 opacity-100 rounded-5">
+              <div class="card-body">
+                <a class="{% if active_direct == message.user.username %}is-active{% endif %} stretched-link" href="{% url 'directs' message.user.username %}">
+                  <div>
+                    <div>
+                      <p>
+                        <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
+                            <small class="text-muted">@{{ message.user.username }}</small>
+                        </h5>
+                      </p>
+                    </div>
+                    <div class="text-muted">
+                      {% if message.unread %}
+                        {{ message.unread }}
+                      {% endif %}        
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

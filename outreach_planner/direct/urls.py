@@ -1,10 +1,10 @@
 from django.urls import path
-from direct.views import Inbox, UserSearch, Directs, NewConversation, SendDirect
-urlpatterns = [
-   	path('', Inbox, name='inbox'),
-   	path('directs/<username>', Directs, name='directs'),
-   	path('new/', UserSearch, name='usersearch'),
-   	path('new/<username>', NewConversation, name='newconversation'),
-   	path('send/', SendDirect, name='send_direct'),
+from . import views
 
+urlpatterns = [
+   	path('', views.inbox, name='inbox'),
+   	path('message/<username>', views.directs, name='directs'),
+   	path('new/', views.user_search, name='usersearch'),
+   	path('new/<username>', views.new_conversation, name='newconversation'),
+   	path('send/', views.senddirect, name='send_direct'),
 ]
