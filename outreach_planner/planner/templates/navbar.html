@@ -28,10 +28,10 @@
             Profile
           </a>
           <ul class="dropdown-menu dropdown-menu-end rounded-4">
-            <li><a class="dropdown-item rounded-4" href="#">
+            <li><a class="dropdown-item rounded-4" href="{% url 'view_profile' %}">
               Hello, <strong>{{ user.get_username }}</strong>!</a>
             </li>
-            <li><a class="dropdown-item rounded-4" href="#">Edit Profile</a></li>
+            <li><a class="dropdown-item rounded-4" href="{% url 'edit-profile' %}">Edit Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <a class="dropdown-item rounded-4" href="{% url 'logout' %}">Logout</a>
