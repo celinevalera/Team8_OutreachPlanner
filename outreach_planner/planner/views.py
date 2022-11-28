@@ -160,3 +160,8 @@ def event_pdf(request, event_id):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+
+# About page
+def about(request):
+    return render(request, 'about.html')

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block content %}
+<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
+    no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh;">
+{% include 'navbar.html' %}
+<div class="text-center py-5">
+    <h1><strong>About UP</strong></h1>
+</div>
+<div class="container">
+    <div>
+    <p><strong>Up</strong> provides aid in documenting and
+        planning outreach programs to ensure that they are secured and well-organized by the
+        client. It is accessible to the student volunteers who are interested and willing to
+        participate in the outreach programs. Moreover, it helps in disseminating information
+        about the outreach activities to the students, organized and finalized by the client,
+        making it easier for them to be engaged and to be involved.</p>
+    <p><strong>Up</strong> is a <i>CPE025 Software Design</i> outreach planner project that can 
+         be used by the Computer Engineering Department of Technological Institute of the Philippines. </p>
+    </div>
+    <div>
+        <p class="fs-4 text-center"><strong>The Team</strong></p>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="card h-100 shadow rounded-4 pt-3">     
+                  <img src="https://www.facebook.com/photo/?fbid=2488731621138379&set=a.156057644405800" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm " height="1920px" width="1080px" alt="...">
+                  <div class="card-body">
+                      <h4 class="card-title">John Carlo Dela Cruz</h4>
+                      <p class="card-text">
+                          <div class="text-truncate">
+                              <strong>CPE41S1-Team 8</strong><br/>
+                          </div>
+                          <div class="text-truncate">
+                              <strong>Team Leader</strong>
+                              <br/>
+                          </div>
+                          <div class="text-truncate">
+                              <strong>Email:</strong> qjccdelacruz@tip.edu.ph <br/>
+                          </div>
+                      </p>
+                </div>
+            </div>
+
+            <div class="card h-100 shadow rounded-4 pt-3">
+                  <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm " height="1920px" width="1080px" alt="...">
+                  <div class="card-body">
+                      <h4 class="card-title">Erie Mae Segui</h4>
+                      <p class="card-text">
+                          <div class="text-truncate">
+                              <strong>CPE41S1-Team 8</strong><br/>
+                            </div>
+                            <div class="text-truncate">
+                                <strong>Team Member</strong>
+                              <br/>
+                          </div>
+                          <div class="text-truncate">
+                              <strong>Email:</strong> qemcsegui@tip.edu.ph <br/>
+                          </div>
+                      </p>
+                </div>
+            </div>
+
+            <div class="card h-100 shadow rounded-4 pt-3">
+                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm " height="1920px" width="1080px" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">Marayah Celine Jeanne Valera</h4>
+                    <p class="card-text">
+                        <div class="text-truncate">
+                            <strong>CPE41S1-Team 8</strong><br/>
+                            </div>
+                            <div class="text-truncate">
+                                <strong>Team Member</strong>
+                              <br/>
+                        </div>
+                        <div class="text-truncate">
+                            <strong>Email:</strong> qmcjdvalera@tip.edu.ph <br/>
+                        </div>
+                    </p>
+              </div>
+          </div>
+    </div>
+    <div class="text-center text-muted py-5">
+        <em>Nothing to show for now!</em>
+    </div>
+    </div>
+</div>
+<div class="container text-center py-3"><br>Made with ❤️ by Team 8<br></div>
+</div>
+{% endblock content%}
