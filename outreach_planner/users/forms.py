@@ -30,6 +30,18 @@ class EditProfileForm(UserChangeForm):
             'email',
             'first_name',
             'last_name',
+<<<<<<< HEAD
             'password'
         )
         
+=======
+            'password',
+            'username'
+        )
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Username'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Email'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Last Name'}),
+        }
+>>>>>>> 23ac3a72e967c28a2c8bbb4ed531327cb8b94f56
