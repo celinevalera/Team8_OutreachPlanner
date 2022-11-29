@@ -70,14 +70,6 @@ def delete_venue(request, venue_id):
     venue.delete()
     return redirect('list-venue')
 
-
-
-def calendar(request):
-    event_list = Event.objects.all()
-    return render(request, 'calendar.html',
-    {'event_list': event_list})
-
-
 #Event
 @staff_member_required(login_url='home')
 def add_event(request):

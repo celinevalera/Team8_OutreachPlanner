@@ -26,6 +26,5 @@ urlpatterns = [
     path("about", views.about, name='about'),
 
     #dashboard
-    path('calendar/',views.calendar,name='calendar'),
     path('event_pdf/<event_id>', views.event_pdf, name='event-pdf'),
 ]
