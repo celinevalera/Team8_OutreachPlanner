@@ -5,17 +5,14 @@
 {% block title %} Dashboard {% endblock title %}
 
 {% block content %}
-<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
-    no-repeat center center fixed; 
-    background-size: cover;
-    min-height: 100vh;">
+
 {% include 'navbar.html' %}
     <div class="text-center py-5">
         <h1><strong>Dashboard</strong></h1>
     </div>
     <div class="container">
         {% if event_list %}
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4 cropped">
             {% for event in event_list %}
             <div class="col">
             <a href="{% url 'show-event' event.id %}" class="text-decoration-none text-reset stretched-link">
