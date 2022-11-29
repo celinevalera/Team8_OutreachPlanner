@@ -36,7 +36,7 @@
             {% for message in messages %}
             <div class="card my-2 mx-5 opacity-100 rounded-5">
               <div class="card-body">
-                <a class="{% if active_direct == message.user.username %}is-active{% endif %} stretched-link" href="{% url 'directs' message.user.username %}">
+                <a class="{% if active_direct == message.user.username %}is-active{% endif %} text-decoration-none text-reset stretched-link" href="{% url 'directs' message.user.username %}">
                   <div>
                     <div>
                       <p>
@@ -57,6 +57,10 @@
             {% endfor %}
         </div>
     </div>
+  </div>
+  <div class="container text-center py-3">
+    <div class="text-center">Server Time: <span id='clock'></span></div>
+    <div class="text-center">Made with ❤️ by Team 8</div>
   </div>
 </div>
 {% endblock %}

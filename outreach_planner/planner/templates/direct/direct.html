@@ -37,7 +37,7 @@
                 <div>
                   <div>
                     <p>
-                      <strong>{{ direct.sender.profile.first_name }} {{ direct.sender.profile.last_name }}</strong> <small>@{{ direct.sender.username }}</small> on: <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
+                      <strong>{{ direct.sender.first_name }} {{ direct.sender.last_name }}</strong> <small class="text-muted fw-light">@{{ direct.sender.username }} <em>| {{ direct.date|date:'N d G:i'}}</em></small>
                       </h5>
                     </p>
                     {{ direct.body }} 
@@ -61,6 +61,9 @@
       </div>
     </div>
   </div>
+  <div class="container text-center py-3">
+    <div class="text-center">Server Time: <span id='clock'></span></div>
+    <div class="text-center">Made with ❤️ by Team 8</div>
   </div>
 </div>
 {% endblock %}

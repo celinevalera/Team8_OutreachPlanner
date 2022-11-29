@@ -2,6 +2,10 @@
 {% load static %}
 <html lang="en">
   <head>
+    <script>
+      var dt = new Date();
+      document.getElementById('date-time').innerHTML=dt;
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="{% static 'logo-sm.png' %}"/>
@@ -38,12 +42,20 @@
       td {
         width: 70%;
       }
+
+      .waw {
+        text-align: right;
+      }
+
     </style>
   </head>
 
 
   <body>
     <div>
+      <div>
+        <p class="waw">Generated: <span id='date-time'></span></p>
+      </div>
       <div>
         <h1> {{ event.event_name }} Event Summary</h1>
       </div>

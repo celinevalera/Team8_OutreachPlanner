@@ -30,9 +30,10 @@
           <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profile
           </a>
-          <ul class="dropdown-menu dropdown-menu-end rounded-4">
+          <ul class="dropdown-menu dropdown-menu-end rounded-4 px-2">
             <li><a class="dropdown-item rounded-4" href="{% url 'view_profile' %}">
-              Hello, <strong>{{ user.get_username }}</strong>!</a>
+              Hello, <strong>{{ request.user.first_name }}</strong>!
+              <div class="text-muted fw-light">@{{ request.user.username }}</div></a>
             </li>
             <li><a class="dropdown-item rounded-4" href="{% url 'edit-profile' %}">Edit Profile</a></li>
             <li><hr class="dropdown-divider"></li>
