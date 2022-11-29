@@ -5,7 +5,7 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User,AbstractUser
 from django.dispatch import receiver
-import uuid
+from datetime import date
 
 # tables
 class Venue(models.Model):
@@ -39,11 +39,15 @@ class Event(models.Model):
     description = models.TextField(blank=True)
     volunteers = models.ManyToManyField(User, blank=True, related_name='events')
     event_image = models.ImageField(null=True, blank=True, upload_to="images/")
-    
-
-
 
     def __str__(self):
         return self.event_name
 
-
+    @property
+    def has_concluded(self):
+        today = date.today()
+        if self.event_date.date() < today:
+            concluded = True
+        else:
+            concluded = False
+        return concluded

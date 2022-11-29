@@ -36,15 +36,20 @@
                     <strong>Event Details</strong>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
+                    {% if event.has_concluded %}
+                        <div class="alert alert-secondary rounded-4 text-center" role="alert">
+                            <em>This event has concluded. Thank you for your interest!</em>
+                        </div>
+                    {% endif %}
+                    
                     <p class="card-text">
-                        <div class="text-truncate">
+                        <div>
                             <strong>Date:</strong> {{ event.event_date }} <br/>
                         </div>
-                        <div class="text-truncate">
+                        <div>
                             <strong>Venue:</strong> {{ event.venue }}
                         </div>
-                        <div class="text-truncate">
+                        <div>
                             <strong>Organizer:</strong> 
                             {% for user in event.organizer.all %} 
                             {% if user.first_name %}
@@ -54,10 +59,10 @@
                             {% endif %}
                             {% endfor %} <br/>
                         </div>
-                        <div class="">
+                        <div>
                             <strong>Description:</strong><br> {{ event.description }} <br/>
                         </div>
-                        <div class="text-truncate">
+                        <div>
                             <strong>Volunteers:</strong><br> 
                             {% for user in event.volunteers.all %} 
                             {% if user.first_name %}
@@ -72,7 +77,10 @@
                 <div>
                     <div class="text-end px-3 py-3">
                         <a class="btn btn-info btn-sm rounded-4" href="{% url 'event-pdf' event.id %}">Print to PDF</a>
+                        {% if event.has_concluded %}
+                        {% else %}
                         <a class="btn btn-success btn-sm rounded-4" href="{% url 'registration-confirmation' event.id %}">Join Event</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

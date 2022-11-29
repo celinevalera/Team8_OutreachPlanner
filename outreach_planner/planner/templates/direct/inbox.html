@@ -29,43 +29,58 @@
         </div>
     </div>
 </div>
-
-<div class = "container">
-    <div class="card shadow mx-5 opacity-100 rounded-5">
-        <div class="card-body">
-          {% if messages %}
-            {% for message in messages %}
-            <div class="card my-2 mx-5 opacity-100 rounded-5">
-              <div class="card-body">
-                <a class="{% if active_direct == message.user.username %}is-active{% endif %} text-decoration-none text-reset stretched-link" href="{% url 'directs' message.user.username %}">
-                  <div>
+<div class="container">
+  <div class="card shadow opacity-100 rounded-5" style="background-color: #D1EEEA;">
+  <div class="row">
+    <div class="col ps-4">
+      <div class="card-body overflow-auto">
+          <div class="card-body">
+              {% for message in messages %}
+              <div class="card my-2 opacity-100 rounded-5">
+                <div class="card-body">
+                  <a class="{% if active_direct == message.user.username %}is-active{% endif %} text-decoration-none text-reset stretched-link" href="{% url 'directs' message.user.username %}">
                     <div>
-                      <p>
-                        <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
-                            <small class="text-muted">@{{ message.user.username }}</small>
-                        </h5>
-                      </p>
+                      <div>
+                        <p>
+                          <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
+                              <small class="text-muted">@{{ message.user.username }}</small>
+                          </h5>
+                        </p>
+                      </div>
+                      <div class="text-muted">
+                        {% if message.unread %}
+                          {{ message.unread }}
+                        {% endif %}        
+                      </div>
                     </div>
-                    <div class="text-muted">
-                      {% if message.unread %}
-                        {{ message.unread }}
-                      {% endif %}        
-                    </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
-            </div>
+              
+            {% empty %}
+              <div class="text-center text-muted py-5">
+                <em>Your inbox is empty... ( ＞︿＜ )</em>
+              </div>
+              <div class="text-center text-muted pb-5">
+                <a class="text-reset" href="{% url 'usersearch' %}">Send someone a greeting now! 👋</a>
+              </div>
             {% endfor %}
-          {% else %}
-            <div class="text-center text-muted py-5">
-              <em>Your inbox is empty... ( ＞︿＜ )</em>
-            </div>
-            <div class="text-center text-muted pb-5">
-              <a class="text-reset" href="{% url 'usersearch' %}">Send someone a greeting now! 👋</a>
-            </div>
-          {% endif %}
+          </div>
         </div>
     </div>
+
+    <div class="col">
+        <div class="card rounded-5 px-2 py-2 mx-4 my-4" style="height: 500px; background-color: aliceblue;">
+          <div class="card-body overflow-auto">
+            <div class="text-center text-muted">
+              <em>Choose a message!</em>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
   </div>
   <div class="container text-center py-3">
     <div class="text-center">Server Time: <span id='clock'></span></div>

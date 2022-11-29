@@ -11,9 +11,11 @@
         <h1><strong>Dashboard</strong></h1>
     </div>
     <div class="container">
-        {% if event_list %}
         <div class="row row-cols-1 row-cols-md-3 g-4 cropped">
             {% for event in event_list %}
+            {% if event.has_concluded %}
+            
+            {% else %}
             <div class="col">
               <div class="card h-100 rounded-4 shadow">
                 <a href="{% url 'show-event' event.id %}" class="text-decoration-none text-reset stretched-link"></a>
@@ -45,20 +47,20 @@
                             <strong>Description:</strong> {{ event.description }} <br/>
                         </div>
                     </p>
-              </div>
-            </a>
+                </div>
+                </a>
             </div>
             </div>
-            {% endfor %}
+            {% endif %}
+            {% empty %}
+            <div class="text-center text-muted py-5">
+                <em>Nothing to show for now! _(:з)∠)_</em>
+            </div>
         </div>
-        {% else %}
-        <div class="text-center text-muted py-5">
-            <em>Nothing to show for now!</em>
-        </div>
-        {% endif %}
+        {% endfor %}
     </div>
     
-    <div class="container text-center py-3">
+    <div class="container text-center py-5">
         <div class="text-center">Server Time: <span id='clock'></span></div>
         <div class="text-center">Made with ❤️ by Team 8</div>
     </div>
