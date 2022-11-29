@@ -39,4 +39,3 @@ class EditProfileForm(UserChangeForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Last Name'}),
         }
-
