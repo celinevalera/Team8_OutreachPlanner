@@ -41,21 +41,20 @@
         <br>
         <div class="row row-cols-1 row-cols-md-3 g-3 cropped">
             {% for event in event_list %}
-            
             <div class="col">
-            <a href="{% url 'show-event' event.id %}" class="text-decoration-none text-reset stretched-link">
-              <div class="card h-100 shadow rounded-4">
-                {% if event.event_image %}
-                <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
-                {% else %}
-                <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
-                {% endif %}
-                <div class="card-body">
-                    <h4 class="card-title">{{ event.event_name }}</h4>
+                <div class="card h-100 shadow rounded-4">
+                    <a href="{% url 'show-event' event.id %}" class="text-decoration-none text-reset stretched-link"></a>
+                    {% if event.event_image %}
+                    <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                    {% else %}
+                    <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ event.event_name }}</h4>
+                    </div>
+                    </a>
                 </div>
-                </div>
-            </a>
-        </div>
+            </div>
             {% endfor %}
     </div>
     <div class="container text-center py-3">
