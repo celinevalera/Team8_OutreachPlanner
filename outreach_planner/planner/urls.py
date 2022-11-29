@@ -23,7 +23,7 @@ urlpatterns = [
     path('search_event', views.search_event, name='search-event'),
     path('update_event/<event_id>', views.update_event, name='update-event'),
     path('delete_event/<event_id>', views.delete_event, name='delete-event'),
-    path("jsi18n", JavaScriptCatalog.as_view(), name='js-catlog'),
+    path("about", views.about, name='about'),
 
     #dashboard
     path('calendar/',views.calendar,name='calendar'),
