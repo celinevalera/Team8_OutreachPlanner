@@ -79,6 +79,21 @@
             min-height: 250px;
             object-fit: cover;
         }
+        div:empty:before{
+            content:attr(data-placeholder);
+            color:gray
+        }
+        span{
+            position: absolute;
+            right: 80px;
+            transform: translate(0,-50%);
+            top: 75%;
+            cursor: pointer;
+        }
+        .fa fa-eye{
+            font-size: 15px;
+            color: #808080
+        }
         
         
     </style>
