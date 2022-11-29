@@ -21,20 +21,44 @@
             </div>
         </div>
         <div class="col">
-            <div class="text-end">
-                <a class="btn btn-success btn-sm rounded-4" href="{% url 'change_password' %}">Change Password</a>
-            </div>
+            
         </div>
     </div>
 </div>
 <div class = "container">
     <div class="card shadow mx-5 opacity-100 rounded-5">
-        <div class="card-body">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Save</button>
-            </form>
+        <div class="card-body text-end">
+            <div class="text-truncate text-start pb-3 px-3">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="pt-3">
+                        <div class="form-label">Full Name (FN, LN) </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col">
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col">
+                            {{ form.last_name }}
+                      </div>
+                    <div class="pt-3">
+                        <div class="form-label">Username</div>
+                        {{ form.username }}
+                    </div>
+                    <div class="pt-3">
+                        <div class="form-label">Email Address</div>
+                        {{ form.email }}
+                    </div>
+                    <div class="pt-3">
+                        <div class="form-label">Password</div>
+                        <a class="btn btn-secondary btn-sm rounded-4" href="{% url 'change_password' %}">Click here to Change Password</a>
+                    </div>
+                    <div class="pt-3">
+                        <div class="text-end"><input type="submit" value="Save Changes" class="btn btn-success rounded-4"></div>
+                    </div>
+                </form>
+            </div>
+           
         </div>
     </div>
 </div>
