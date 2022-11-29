@@ -33,6 +33,7 @@
 <div class = "container">
     <div class="card shadow mx-5 opacity-100 rounded-5">
         <div class="card-body">
+          {% if messages %}
             {% for message in messages %}
             <div class="card my-2 mx-5 opacity-100 rounded-5">
               <div class="card-body">
@@ -55,6 +56,14 @@
               </div>
             </div>
             {% endfor %}
+          {% else %}
+            <div class="text-center text-muted py-5">
+              <em>Your inbox is empty... ( ＞︿＜ )</em>
+            </div>
+            <div class="text-center text-muted pb-5">
+              <a class="text-reset" href="{% url 'usersearch' %}">Send someone a greeting now! 👋</a>
+            </div>
+          {% endif %}
         </div>
     </div>
   </div>
