@@ -25,17 +25,17 @@
             <div class="text-truncate text-left pb-3 px-3">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="mb-3 mx-5 mt-3 ">
+                    <div class="mb-3 mx-5 mt-3">
                       <label for="input_email" class="form-label">Username</label>
-                      <input type="text" class="form-control rounded-4" name="username" aria-describedby="emailHelp">
+                      <input type="text" class="form-control rounded-4" name="username" aria-describedby="username">
                     </div>
                     <div class="mb-3 mx-5 mt-3">
                       <label for="input_email" class="form-label">First Name</label>
-                      <input type="text" class="form-control rounded-4" name="first_name" aria-describedby="emailHelp">
+                      <input type="text" class="form-control rounded-4" name="first_name" aria-describedby="first_name">
                     </div>
                     <div class="mb-3 mx-5 mt-3">
                       <label for="input_email" class="form-label">Last Name</label>
-                      <input type="text" class="form-control rounded-4" name="last_name" aria-describedby="emailHelp">
+                      <input type="text" class="form-control rounded-4" name="last_name" aria-describedby="last_name" >
                     </div>
                     <div class="mb-3 mx-5 mt-3">
                       <label for="input_email" class="form-label">Email</label>
@@ -52,7 +52,7 @@
                     <div class = "text-center">
                       <input type="submit" value="Sign me Up!" class="btn btn-success rounded-4">
                     </div>
-                    
+  
                 </form>
             </div>
         </div>
