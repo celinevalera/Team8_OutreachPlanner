@@ -53,8 +53,8 @@
 
   <body>
     <div>
-      <div>
-        <p class="waw">Generated: <span id='date-time'></span></p>
+      <div class="waw">
+        <em><small>Generated: {{event.time_gen}}</small></em>
       </div>
       <div>
         <h1> {{ event.event_name }} Event Summary</h1>
@@ -104,7 +104,11 @@
             <td colspan="2">
               {% for user in event.organizer.all %} 
                 <br>
-                {{ user.first_name }} {{ user.last_name }} 
+                {% if user.first_name %}
+                    {{ user.first_name }} {{ user.last_name }}
+                  {% else %}
+                    [Redacted]
+                  {% endif %}
                 <br> 
                 {{ user.email }}
                 <br>
@@ -118,7 +122,11 @@
             <td colspan="2">
               {% for user in event.volunteers.all %} 
                 <br>
-                {{ user.first_name }} {{ user.last_name }} 
+                  {% if user.first_name %}
+                    {{ user.first_name }} {{ user.last_name }}
+                  {% else %}
+                    [Redacted]
+                  {% endif %}
                 <br> 
                 {{ user.email }}
                 <br>

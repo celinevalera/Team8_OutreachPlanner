@@ -17,6 +17,8 @@ urlpatterns = [
     #event
     path('registration_confirmation/<event_id>', views.registration_confirmation,
             name='registration-confirmation'),
+    path('cancel_application/<event_id>', views.cancel_application,
+            name='cancel-application'),
     path('add_event', views.add_event, name='add-event'),
     path('list_event', views.list_event, name='list-event'),
     path('show_event/<event_id>', views.show_event, name='show-event'),
