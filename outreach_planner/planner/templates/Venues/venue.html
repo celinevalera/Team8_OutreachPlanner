@@ -37,11 +37,11 @@
                 <button class="btn btn-secondary rounded-4" type="Submit">Search</button>
             </form>
         </div>
-        <br>
+        <div class="container py-3">
         <div class="row row-cols-1 row-cols-md-3 g-3 cropped">
             {% for venue in venue_list %}
             <div class="col">
-                <div class="card h-100 shadow rounded-4">
+                <div class="card h-100 shadow rounded-4" style="background-color: #D1EEEA;">
                     <a href="{% url 'show-venue' venue.id %}" class="text-decoration-none text-reset stretched-link"></a>
                     {% if venue.venue_image %}
                     <img src="{{ venue.venue_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
@@ -55,6 +55,7 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
         </div>
     </div>
     <div class="container text-center py-3">

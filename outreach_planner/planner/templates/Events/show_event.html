@@ -22,7 +22,7 @@
                 <div class="text-end">
                     <div class="pb-2">
                     <a class="btn btn-success btn-sm rounded-4" href="{% url 'update-event' event.id %}">Update Event</a>
-                    <button type="button"class="btn btn-danger btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#confirmation">
+                    <button type="button"class="btn btn-danger btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#delete_confirmation">
                             Delete Event</button></div>
                 </div>
                 {% endif %}
@@ -31,7 +31,7 @@
     </div>
 
     <div class="container">
-            <div class="card h-100 shadow rounded-4">
+            <div class="card h-100 shadow rounded-4" style="background-color: #D1EEEA;">
                 <div class="card-header text-center">
                     <strong>Event Details</strong>
                 </div>
@@ -40,6 +40,15 @@
                         <div class="alert alert-secondary rounded-4 text-center" role="alert">
                             <em>This event has concluded. Thank you for your interest!</em>
                         </div>
+                    {% endif %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible fade show rounded-4 text-center" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
                     {% endif %}
                     
                     <p class="card-text">
@@ -63,23 +72,32 @@
                             <strong>Description:</strong><br> {{ event.description }} <br/>
                         </div>
                         <div>
+                            {% if event.volunteers.all %}
                             <strong>Volunteers:</strong><br> 
                             {% for user in event.volunteers.all %} 
-                            {% if user.first_name %}
-                                {{ user.first_name }} {{user.last_name}}<br> 
-                            {% else %}
-                                [Redacted]<br>
-                            {% endif %}
+                                {% if user.first_name %}
+                                    {{ user.first_name }} {{user.last_name}}<br> 
+                                {% else %}
+                                    [Redacted]<br>
+                                {% endif %}
                             {% endfor %}
+                            {% else %}
+                            
+                            {% endif %}
                         </div>
                     </p>
                 </div>
                 <div>
                     <div class="text-end px-3 py-3">
-                        <a class="btn btn-info btn-sm rounded-4" href="{% url 'event-pdf' event.id %}">Print to PDF</a>
                         {% if event.has_concluded %}
                         {% else %}
-                        <a class="btn btn-success btn-sm rounded-4" href="{% url 'registration-confirmation' event.id %}">Join Event</a>
+                            {% if request.user in event.volunteers.all %}
+                            <a class="btn btn-info btn-sm rounded-4" href="{% url 'event-pdf' event.id %}">Print to PDF</a>
+                            <a class="btn btn-success btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#cancel_application">Leave Event</a>
+                            {% else %}
+                            <a class="btn btn-info btn-sm rounded-4" href="{% url 'event-pdf' event.id %}">Print to PDF</a>
+                            <a class="btn btn-success btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#apply_confirmation">Join Event</a>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
@@ -92,22 +110,58 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete_confirmation" tabindex="-1" aria-labelledby="delete_confirmation" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+        <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="confirmationLabel">Confirmation</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5" id="confirmationLabel">Deletion Confirmation</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete <strong>{{ event.event_name}}</strong>?
+            Are you sure you want to delete <strong>{{ event.event_name}}</strong>?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary rounded-4" data-bs-dismiss="modal">Close</button>
-          <a class="btn btn-danger rounded-4" href="{% url 'delete-event' event.id %}">Delete</a>
+            <button type="button" class="btn btn-secondary rounded-4" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-danger rounded-4" href="{% url 'delete-event' event.id %}">Delete</a>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<div class="modal fade" id="apply_confirmation" tabindex="-1" aria-labelledby="apply_confirmation" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="confirmationLabel">Join Event</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Confirm participation on <strong>{{ event.event_name}}</strong>?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-4" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-success rounded-4" href="{% url 'registration-confirmation' event.id %}">Yes</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cancel_application" tabindex="-1" aria-labelledby="cancel_application" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="confirmationLabel">Cancel Application</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Withdraw participation on <strong>{{ event.event_name}}</strong>?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-4" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-danger rounded-4" href="{% url 'cancel-application' event.id %}">Yes</a>
+        </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

@@ -2,13 +2,35 @@
 
 {% load static %}
 
+{% block title %} Search User {% endblock title %}
+
 {% block content %}
 
- <div class="columns is-mobile">
-  <div class="column is-offset-one-fifth">
+{% include 'navbar.html' %}
 
+<div class="container">
+  <div class="row align-items-center py-5">
+      <div class="col">
+          <div class="text-start">
+              <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
+          </div>
+      </div>
+      <div class="col">
+          <div class="text-center">
+              <h1><strong>Search User</strong></h1>
+          </div>
+      </div>
+      <div class="col">
+          <div class="text-end">
+              
+          </div>
+      </div>
+  </div>
+</div>
 
-<div class="field has-addons">
+<div class="container">
+<div class="card shadow rounded-5 text-center p-3" style="background-color: #D1EEEA;">
+
 <form>
   <div class="control">
     <input class="input is-large" name="q" type="text" placeholder="Search users..." value="{{ request.GET.q }}">
@@ -17,16 +39,10 @@
   	<button type="submit" class="button is-success">Search</button>
   </div>
   </form>
-</div>
 
-
-</div>
-</div>
-
-<div class="column is-one-quarter">
 
 {% for user in users %}
-<div class="box">
+<div class="container text-center py-3">
   <article class="media">
     <div class="media-left">
       <figure class="image is-64x64">
@@ -48,8 +64,83 @@
   </article>
 </div>
 {% endfor %}
-	
 
+</div>
 </div>
 
 {% endblock %}
+
+{% if searched %}
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col">
+                <div class="text-start">
+                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'list-event' %}">&larr; Back</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center">
+                    <h1>Search Results for <strong>{{ searched }}</strong></h1> 
+                </div>
+            </div>
+            <div class="col">
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-3 cropped">
+            {% for event in event %}
+            <div class="col">
+                <div class="card h-100 shadow rounded-4">
+                    <a class="text-decoration-none text-reset stretched-link" href="{% url 'show-event' event.id %}">
+                    {% if event.event_image %}
+                    <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                    {% else %}
+                    <img src="{% static 'temp-large.png' %}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ event.event_name }}</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col">
+                <div class="text-start">
+                    <button class="btn btn-success btn-sm rounded-4" onclick="history.back()">&larr; Back</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center">
+                    <h1>Search Results for <strong>NOTHING!</strong></h1> 
+                </div>
+            </div>
+            <div class="col">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow rounded-4">
+                    <div class="card-body text-center">
+                        You forgot to search something!
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    {% endif %}

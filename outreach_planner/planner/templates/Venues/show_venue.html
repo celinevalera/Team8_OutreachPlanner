@@ -31,12 +31,20 @@
     </div>
 
     <div class="container">
-              <div class="card h-100 shadow rounded-4">
+              <div class="card h-100 shadow rounded-4" style="background-color: #D1EEEA;">
                 <div class="card-header text-center">
                     <strong>Venue Details</strong>
                   </div>
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible fade show rounded-4 text-center" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    
                     <p class="card-text">
                         <div class="text-truncate">
                             <strong>Address:</strong> {{ venue.address }} <br/>

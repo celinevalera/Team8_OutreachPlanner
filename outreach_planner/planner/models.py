@@ -5,7 +5,7 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User,AbstractUser
 from django.dispatch import receiver
-from datetime import date
+from datetime import date, datetime
 
 # tables
 class Venue(models.Model):
@@ -51,3 +51,8 @@ class Event(models.Model):
         else:
             concluded = False
         return concluded
+
+    @property
+    def time_gen(self):
+        time = datetime.now()
+        return str(time)

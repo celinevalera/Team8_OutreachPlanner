@@ -7,6 +7,8 @@ from django.views.decorators.cache import cache_control
 from .models import Event,Venue
 from .forms import VenueForm,EventForm
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from datetime import datetime
 
 
 from xhtml2pdf import pisa
@@ -60,6 +62,7 @@ def update_venue(request, venue_id):
     form = VenueForm(request.POST or None, request.FILES or None, instance=venue)
     if form.is_valid():
         form.save()
+        messages.success(request,("Venue update successful."))
         return redirect('show-venue', venue.id)
     return render(request, 'Venues/update_venue.html',
     {'venue': venue, 'form': form})
@@ -111,6 +114,7 @@ def update_event(request, event_id):
     if form.is_valid():
         form.save(commit=False)
         form.save()
+        messages.success(request,("Event update successful!"))
         return redirect('show-event', event.id)
     return render(request, 'Events/update_event.html',
     {'event': event, 'form': form})
@@ -126,22 +130,28 @@ def delete_event(request, event_id):
 @login_required(login_url='/login')
 def registration_confirmation(request,event_id):
     event = Event.objects.get(pk=event_id)
-    if request.method == "POST":
-        event.volunteers.add(request.user)
-        return redirect('list-event')
-    return render(request, 'Events/registration_confirmation.html',{'event':event})
+    event.volunteers.add(request.user)
+    messages.success(request,("Application successful!"))
+    return redirect('/show_event/'+event_id)
 
+@login_required(login_url='/login')
+def cancel_application(request,event_id):
+    event = Event.objects.get(pk=event_id)
+    event.volunteers.remove(request.user)
+    messages.success(request,("Application cancellation successful."))
+    return redirect('/show_event/'+event_id)
 
 
 #   Generate PDF File Event Summary
 def event_pdf(request, event_id):
     event = Event.objects.get(pk=event_id)
+    time = str(datetime.now()).split(".")
 
     template_path = 'Events/pdfSummary.html'
     context = {'event': event}
 
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="event-summary.pdf"'
+    response['Content-Disposition'] = f'filename="{event.event_name}_Event Summary_{time[0]}.pdf"'
     template = get_template(template_path)
     html = template.render(context)
 

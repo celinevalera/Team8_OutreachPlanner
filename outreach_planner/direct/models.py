@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Max
+from django.utils import timezone
+from datetime import datetime
 
 # Create your models here.
 class Message(models.Model):
@@ -8,7 +10,7 @@ class Message(models.Model):
 	sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
 	recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 	body = models.TextField(max_length=1000, blank=True, null=True)
-	date = models.DateTimeField(auto_now_add=True)
+	date = models.DateTimeField(default=datetime.now())
 	is_read = models.BooleanField(default=False)
 
 	def send_message(from_user, to_user, body):
@@ -38,3 +40,8 @@ class Message(models.Model):
 				'unread': Message.objects.filter(user=user, recipient__pk=message['recipient'], is_read=False).count()
 				})
 		return users
+
+	@property
+	def check_unread(user):
+		directs_count = Message.objects.filter(user=user, is_read=False).count()
+		return directs_count
