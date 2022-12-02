@@ -20,7 +20,6 @@
       h1 {
         font-size: 20px;
       }
-
       
       table, th, td {
         border: 1px solid black;
@@ -30,8 +29,7 @@
 
       th, td {
         text-align: justify;
-        padding: 2px;
-        margin: auto;
+        padding: 2px;     
         
       }
       
@@ -40,11 +38,19 @@
       }
 
       td {
-        width: 70%;
+        width: 70%;  
+        padding: 0.5rem;
+        
       }
+
+      table .noborder {
+        border-top:  white;
+      }
+      
 
       .waw {
         text-align: right;
+        font-size: 15px; 
       }
 
     </style>
@@ -52,7 +58,6 @@
 
 
   <body>
-    <div>
       <div class="waw">
         <em><small>Generated: {{event.time_gen}}</small></em>
       </div>
@@ -68,7 +73,6 @@
             <th><h2>What:</h2></th>
             <td colspan="2">{{ event.event_name }}</td>
           </tr>
-
           <tr>
             <th><h2>When:</h2></th>
             <td colspan="2"> {{ event.event_date }}</td>
@@ -99,49 +103,56 @@
           <tr>
             <th><h2>Description:</h2></th>
             <td colspan="2"> {{ event.description }}</td>
+          </tr>
+
           <tr>
             <th><h2>Organizer:</h2></th>
             <td colspan="2">
               {% for user in event.organizer.all %} 
                 <br>
                 {% if user.first_name %}
-                    {{ user.first_name }} {{ user.last_name }}
+                    <div>{{ user.first_name }} {{ user.last_name }}</div>
                   {% else %}
                     [Redacted]
                   {% endif %}
-                <br> 
-                {{ user.email }}
+                <div>{{ user.email }}</div>
                 <br>
               {% endfor %}
             </td>
 
           </tr>
-
+          
           <tr>
             <th><h2>Attendees:</h2></th>
-            <td colspan="2">
-              {% for user in event.volunteers.all %} 
-                <br>
-                  {% if user.first_name %}
-                    {{ user.first_name }} {{ user.last_name }}
-                  {% else %}
-                    [Redacted]
-                  {% endif %}
-                <br> 
-                {{ user.email }}
-                <br>
-              {% endfor %}
+            <td colspan="2"><center><h3>Event Volunteers Information</h3></center>
+          
+            {% for user in event.volunteers.all %} 
+            
+              <tr>
+                {% if user.first_name %}
+                  <td class="noborder" colspan="3" >
+                    {{ user.first_name }} {{ user.last_name }} <br>
+                    {{ user.email }} 
+                  </td> 
               
-            </td>
+                {% else %}
+              
+                  <td class="noborder" colspan="3">
+                    [Redacted] <br>
+                    {{ user.email }}
+                  </td> 
+              </tr>
+            {% endif %}
+              <br>
+            {% endfor %}
+            </td>  
           </tr>
           
         </tbody>
-      </table>
-
-      <div>
-        <h4>Made with ❤ by Team 8</h4>
-      </div>
-      
+      </table>     
     </div>  
   </body>
+  <footer>
+    <h4>Made with ❤ by Team 8</h4>
+  </footer>
 </html>
