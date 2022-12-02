@@ -18,7 +18,7 @@ class EventForm(ModelForm):
         }
         widgets = {
             'event_name': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Event Name'}),
-            'event_date': forms.DateTimeInput(attrs={'class': 'form-control rounded-4 datetimepicker-input', 'placeholder': 'Event Date'}),
+            'event_date': forms.DateTimeInput(format='%m/%d/%Y %H:%M',attrs={'class': 'form-control rounded-4 datetimepicker-input', 'placeholder': 'Event Date','type':'datetime'}),
             'venue': forms.Select(attrs={'class': 'form-control rounded-4', 'placeholder': 'Venue'}),
             'organizer': forms.SelectMultiple(attrs={'class': 'form-control rounded-4', 'placeholder': 'Organizer'}),
             'description': forms.Textarea(attrs={'class': 'form-control rounded-4', 'placeholder': 'Description'}),
