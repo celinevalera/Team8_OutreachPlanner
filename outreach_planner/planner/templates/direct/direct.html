@@ -16,12 +16,14 @@
       </div>
       <div class="col">
           <div class="text-center">
-              <h1><strong>Inbox</strong></h1>
+              <h1><strong>Chat with @{{ active_direct }}</strong></h1>
           </div>
       </div>
       <div class="col">
           <div class="text-end">
               <a class="btn btn-success btn-sm rounded-4" href="{% url 'usersearch' %}">Compose Message</a>
+              <a class="btn btn-success btn-sm rounded-4" href="{% url 'delete-msg' active_direct %}">Delete message</a>
+              
           </div>
       </div>
   </div>
