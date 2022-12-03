@@ -22,7 +22,7 @@
       <div class="col">
           <div class="text-end">
               <a class="btn btn-success btn-sm rounded-4" href="{% url 'usersearch' %}">Compose Message</a>
-              <a class="btn btn-success btn-sm rounded-4" href="{% url 'delete-msg' active_direct %}">Delete message</a>
+              <a class="btn btn-success btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#delete_confirmation">Delete message</a>
               
           </div>
       </div>
@@ -128,5 +128,28 @@
   <div class="text-center">Server Time: <span id='clock'></span></div>
   <div class="text-center">Made with ❤️ by Team 8</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete_confirmation" tabindex="-1" aria-labelledby="delete_confirmation" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h1 class="modal-title fs-5" id="confirmationLabel">Deletion Confirmation</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure you want to delete conversation with <strong>{{ active_direct }}</strong>?</p>
+          <p><i>Note: This will only delete your copy of the conversation.</i></p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary rounded-4" data-bs-dismiss="modal">Close</button>
+          <a class="btn btn-danger rounded-4" href="{% url 'delete-msg' active_direct %}">Delete</a>
+      </div>
+      </div>
+  </div>
+</div>
+
+
+
 
 {% endblock %}
