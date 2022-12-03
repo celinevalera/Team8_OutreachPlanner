@@ -7,4 +7,5 @@ urlpatterns = [
    	path('new/', views.user_search, name='usersearch'),
    	path('new/<username>', views.new_conversation, name='newconversation'),
    	path('send/', views.senddirect, name='send_direct'),
+	path('delete_msg/<username>', views.delete_msg, name='delete-msg')
 ]
