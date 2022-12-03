@@ -32,37 +32,32 @@
 <div class="card shadow rounded-5 text-center p-3" style="background-color: #D1EEEA;">
 
 <form>
-  <div class="control">
-    <input class="input is-large" name="q" type="text" placeholder="Search users..." value="{{ request.GET.q }}">
+  <div class="py-2">
+    <input class="form-control input is-large rounded-4" name="q" type="text" placeholder="Search users..." value="{{ request.GET.q }}">
   </div>
-  <div class="control">
-  	<button type="submit" class="button is-success">Search</button>
+  <div class="py-2 ">
+  	<button type="submit" class="btn btn-success btn-sm rounded-4 py-1 px-3">Search</button>
   </div>
-  </form>
+</form>
 
 
 {% for user in users %}
-<div class="container text-center py-3">
-  <article class="media">
-    <div class="media-left">
-      <figure class="image is-64x64">
-          {% if user.profile.picture %}
-            <img src="{{ user.profile.picture.url }}" alt="Placeholder image">
-          {% else %}
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-          {% endif %}
-      </figure>
-    </div>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>{{ user.profile.first_name }} {{ user.profile.last_name }}</strong><small>@{{ user.username }}</small>
-        </p>
-        <a href="{% url 'newconversation' user.username %}" class="button is-info">Send a message!</a>
-      </div>
-    </div>
-  </article>
-</div>
+    <div class="container text-center  py-3">
+        <div class="card rounded-5 py-2" style="background-color: aliceblue;">
+            <a href="{% url 'newconversation' user.username %}" class="stretched-link text-decoration-none text-reset">
+            <strong>{{ user.first_name }} {{ user.last_name }}</strong> <small class="text-muted">@{{ user.username }}</small>
+            
+            <div>
+                
+            </div>
+            </a>
+        </div>
+            
+    </div>   
+    
+             
+        
+    
 {% endfor %}
 
 </div>
