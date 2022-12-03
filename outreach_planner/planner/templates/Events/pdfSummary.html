@@ -20,6 +20,10 @@
       h1 {
         font-size: 20px;
       }
+
+      h2 {
+        font-size: 15px;
+      }
       
       table, th, td {
         border: 1px solid black;
@@ -41,113 +45,107 @@
         width: 70%;  
         padding-top: 0.5rem;
       }
-
-      table .noborder {
-        border-top:  white;
-      }
       
       .waw {
         text-align: right;
         font-size: 15px; 
       }
 
+      @page {
+        size: letter;
+        margin: 1cm;
+        padding-top: 0.5px;
+      }
+      
+      
     </style>
   </head>
 
 
   <body>
-      <div class="waw">
-        <em><small>Generated: {{event.time_gen}}</small></em>
-      </div>
-      <div>
-        <h1> {{ event.event_name }} Event Summary</h1>
-      </div>
-      <table>
-        <thead>
-          <h2> Event Details </h2>
-        </thead>
-        <tbody>
-          <tr>
-            <th><h2>What:</h2></th>
-            <td colspan="2">{{ event.event_name }}</td>
-          </tr>
-          <tr>
-            <th><h2>When:</h2></th>
-            <td colspan="2"> {{ event.event_date }}</td>
-          </tr>
-
-          <tr>
-            <th rowspan="5"><h2>Where:</h2></th>
-            <td colspan="2"><center><h3>Venue Details</h3></center>
-              <tr>
-                <th>Venue Name:</th>
-                <td>{{ event.venue.venue_name }}</td>
-              </tr>
-              <tr>
-                <th>Address:</th>
-                <td>{{ event.venue.address }}</td>
-              </tr>
-              <tr>
-                <th>URL:</th>
-                <td>{{ event.venue.web_link }}</td>
-              </tr>
-              <tr>
-                  <th>Contact Details:</th>
-                  <td>{{ event.venue.phone }}, {{ event.venue.email }}</td>
-              </tr>
-            </td>
-          </tr>
-
-          <tr>
-            <th><h2>Description:</h2></th>
-            <td colspan="2"> {{ event.description }}</td>
-          </tr>
-
-          <tr>
-            <th><h2>Organizer:</h2></th>
-            <td colspan="2">
-              {% for user in event.organizer.all %} 
-                {% if user.first_name %}
-                    <div>{{ user.first_name }} {{ user.last_name }}</div>
-                  {% else %}
-                    [Redacted]
-                  {% endif %}
-                <div>{{ user.email }}</div>
-                <br>
-              {% endfor %}
-            </td>
-
-          </tr>
-          
-          <tr>
-            <th><h2>Attendees:</h2></th>
-            <td colspan="2"><center><h3>Event Volunteers Information</h3></center>
-          
-            {% for user in event.volunteers.all %} 
+        <em class="waw"><small>Generated: {{event.time_gen}}</small></em>
+        <table>
+          <thead>
+            <h1> 
+              {{ event.event_name }} <br> 
+              Event Summary
+            </h1>
+          </thead>
+          <tbody>
+            <tr>
+              <th><h2>What:</h2></th>
+              <td colspan="2">{{ event.event_name }}</td>
+            </tr>
+            <tr>
+              <th><h2>When:</h2></th>
+              <td colspan="2"> {{ event.event_date }}</td>
+            </tr>
+  
+            <tr>
+              <th rowspan="5"><h2>Where:</h2></th>
+              <td colspan="2"><center><h3>Venue Details</h3></center>
+                <tr>
+                  <th>Venue Name:</th>
+                  <td>{{ event.venue.venue_name }}</td>
+                </tr>
+                <tr>
+                  <th>Address:</th>
+                  <td>{{ event.venue.address }}</td>
+                </tr>
+                <tr>
+                  <th>URL:</th>
+                  <td>{{ event.venue.web_link }}</td>
+                </tr>
+                <tr>
+                    <th>Contact Details:</th>
+                    <td>{{ event.venue.phone }}, {{ event.venue.email }}</td>
+                </tr>
+              </td>
+            </tr>
+  
+            <tr>
+              <th><h2>Description:</h2></th>
+              <td colspan="2"> {{ event.description }}</td>
+            </tr>
+  
+            <tr>
+              <th><h2>Organizer:</h2></th>
+              <td colspan="2">
+                {% for user in event.organizer.all %} 
+                  {% if user.first_name %}
+                      <div>{{ user.first_name }} {{ user.last_name }}</div>
+                    {% else %}
+                      [Redacted]
+                    {% endif %}
+                  <div>{{ user.email }}</div>
+                  <br>
+                {% endfor %}
+              </td>
+            </tr>
             
-              <tr>
-                {% if user.first_name %}
-                  <td class="noborder" colspan="3" >
-                    {{ user.first_name }} {{ user.last_name }} <br>
-                    {{ user.email }} 
-                  </td> 
-              
-                {% else %}
-              
-                  <td class="noborder" colspan="3">
-                    [Redacted] <br>
-                    {{ user.email }}
-                  </td> 
-              </tr>
-            {% endif %}
-              <br>
-            {% endfor %}
-            </td>  
-          </tr>
-          
-        </tbody>
-      </table>     
-    </div>  
+            <tr>
+              <th><h2>Attendees:</h2></th>
+              <td colspan="2"><center><h3>Event Volunteers Information</h3></center>
+            
+              {% for user in event.volunteers.all %} 
+                <tr>
+                  {% if user.first_name %}
+                    <td colspan="3" >
+                      {{ user.first_name }} {{ user.last_name }} <br>
+                      {{ user.email }} 
+                    </td> 
+                  {% else %}
+                    <td colspan="3">
+                      [Redacted] <br>
+                      {{ user.email }}
+                    </td> 
+                </tr>
+                  {% endif %}
+              {% endfor %}
+              </td>  
+            </tr>
+          </tbody>
+        </table>     
   </body>
   <footer>
     <h4>Made with ❤ by Team 8</h4>
