@@ -22,7 +22,6 @@
             </div>
         </div>
         <div class="col">
-            
         </div>
     </div>
 </div>
@@ -31,7 +30,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-3 cropped">
         {% for event in event %}
         <div class="col">
-            <div class="card h-100 shadow rounded-4">
+            <div class="card h-100 shadow rounded-4" style="background-color: #D1EEEA;">
                 <a class="text-decoration-none text-reset stretched-link" href="{% url 'show-event' event.id %}">
                 {% if event.event_image %}
                 <img src="{{ event.event_image.url }}" class="img-fluid rounded-4 px-2 py-2 box-shadow-sm" alt="...">
@@ -70,7 +69,7 @@
         <div class="col">
         </div>
         <div class="col">
-            <div class="card h-100 shadow rounded-4">
+            <div class="card h-100 shadow rounded-4" style="background-color: #D1EEEA;">
                 <div class="card-body text-center">
                     You forgot to search something!
                 </div>
@@ -81,9 +80,6 @@
     </div>
 </div>
 {% endif %}
-<div class="container text-center py-3">
-    <div class="text-center">Server Time: <span id='clock'></span></div>
-    <div class="text-center">Made with ❤️ by Team 8</div>
-</div>
+
 
 {% endblock content %}
