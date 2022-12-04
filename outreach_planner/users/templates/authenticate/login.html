@@ -5,15 +5,19 @@
 {% block title %} Login {% endblock title %}
 
 {% block content %}
-<div class="bg-image" style="background: url('{% static 'loginbg.png' %}')
+<div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1036284643542061146/1048989320540852364/loginbg.png')
     no-repeat center center fixed; 
     background-size: cover;
-    height: 100vh">
-  <div class="container pt-5 pb-5">
+    min-height: 100vh;">
+
+  <div class="container py-5">
       <img src="{% static 'logo.png' %}" class="mx-auto d-block" style="width:10%">
   </div>
-  <div class = "container">
-    <div class="card shadow mx-5 opacity-100 rounded-5">
+  
+  <div class= "row row row-cols-1 row-cols-md-3">
+    <div class="col"></div>
+    <div class="col">
+    <div class="card shadow mx-3 opacity-100 rounded-5">
         <div class="card-body">
           {% if messages %}
             {% for message in messages %}
@@ -25,19 +29,19 @@
           {% endif %}
         <form action="" method=POST>
           {% csrf_token %}
-            <div class="mb-3 mx-5 mt-3">
+            <div class="mx-2 my-3">
               <label for="input_email" class="form-label">Username</label>
               <input type="text" class="form-control rounded-4" name="username" aria-describedby="emailHelp">
             </div>
-            <div class="mb-3 mx-5">
+            <div class="mx-2 mb-3">
               <label for="input_email" class="form-label">Password</label>
               <input type="password" class="form-control rounded-4" name="password">
             </div>
             <div class = "text-center">
-              <a>Forgot Password</a>
+              <a>New here?</a>
             </div>
             <div class = "text-center">
-              <a href="{% url 'register' %}">Signup</a>
+              <a href="{% url 'register' %}">Sign Up!</a>
             </div>
             <br>
             <div class = "text-center">
@@ -46,6 +50,9 @@
         </form>
         </div>
     </div>
+    </div>
+    <div class="col"></div>
   </div>
-</div>
+
 {% endblock content %}
+</div>

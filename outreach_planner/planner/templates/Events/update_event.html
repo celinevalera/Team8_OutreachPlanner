@@ -5,68 +5,64 @@
 {% block content %}
 
 {% include 'navbar.html' %}
-    <div class="container">
-        <div class="row align-items-center py-5">
-            <div class="col">
-                <div class="text-start">
-                    <a class="btn btn-success btn-sm rounded-4"  href="{% url 'show-event' event.id %}">&larr; Back</a>
-                </div>
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col">
+            <div class="text-start">
+                <a class="btn btn-success btn-sm rounded-4"  href="{% url 'show-event' event.id %}">&larr; Back</a>
             </div>
-            <div class="col">
-                <div class="text-center">
-                    <h1>Update <strong>{{ event.event_name }}</strong></h1>
-                </div>
+        </div>
+        <div class="col">
+            <div class="text-center">
+                <h1>Update <strong>{{ event.event_name }}</strong></h1>
             </div>
-            <div class="col">
-                <div class="text-end">
-                    
-                </div>
+        </div>
+        <div class="col">
+            <div class="text-end">
+                
             </div>
         </div>
     </div>
-    <div class="container">
-              <div class="card h-100 shadow rounded-4">
-                <div class="card-header text-center">
-                    <h5><strong>Event Details</strong></h5>
-                    
-                  </div>
-                <div class="card-body text-center">
-                    <div class="text-truncate text-start pb-3 px-3">
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div>
-                                <div>Project Photo: {{ form.event_image }}</div>
-                            </div>
-                            <div>
-                                <div>Program Title: {{ form.event_name }}</div>
-                            </div>
-    
-                            <div>Venue:  {{ form.venue }} </div>
-    
-                            <br>
-                            <div>Project Description: 
-                                <div>{{ form.description }} </div>
-                            </div>
-    
-                            <br>
-                            <div>Organizer:  {{ form.organizer }} </div>
-                            
-                            <br>
-                            <div>
-                                <div> 
-                                    <div> Date: {{ form.event_date }} </div>
-                                </div>
-                                <div class="text-end"><input type="submit" value="Submit" class="btn btn-success rounded-4"></div>
-                            </div>
-                            
-                        </form>
+</div>
+
+<div class="container">
+        <div class="card h-100 shadow rounded-4" style="background-color: #D1EEEA;">
+        <div class="card-header text-center">
+            <h5><strong>Event Details</strong></h5>
+        </div>
+        <div class="card-body text-center">
+            <div class="text-truncate text-start pb-3 px-3">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <div>Project Photo: {{ form.event_image }}</div>
                     </div>
-              </div>
+                    <div>
+                        <div>Program Title: {{ form.event_name }}</div>
+                    </div>
+
+                    <div>Venue:  {{ form.venue }} </div>
+
+                    <br>
+                    <div>Project Description: 
+                        <div>{{ form.description }} </div>
+                    </div>
+
+                    <br>
+                    <div>Organizer:  {{ form.organizer }} </div>
+                    
+                    <br>
+                    <div>
+                        <div> 
+                            <div> Date: {{ form.event_date }} </div>
+                        </div>
+                        <div class="text-end"><input type="submit" value="Submit" class="btn btn-success rounded-4"></div>
+                    </div>
+                    
+                </form>
             </div>
-    </div>
-    <div class="container text-center py-3">
-        <div class="text-center">Server Time: <span id='clock'></span></div>
-        <div class="text-center">Made with ❤️ by Team 8</div>
+        </div>
     </div>
 </div>
+
 {% endblock content %}

@@ -29,73 +29,69 @@
 
 <div class="container">
   <div class="card shadow rounded-5 p-md-3 p-sm-1" style="background-color: #D1EEEA;">
-  <div class="row">
-    <div class="col-md">
-    <nav class="navbar navbar-expand-md rounded-bottom">
-      <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#chats" aria-controls="chats" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="chats">
-          <div class="col navbar-nav">
-            <div class="card-body overflow-auto" style="height: 250px;">
-              {% for message in messages %}
-                <div class="card my-2 opacity-100 rounded-5">
-                  <div class="card-body">
-                    <a class="{% if active_direct == message.user.username %}is-active{% endif %} text-decoration-none text-reset stretched-link" href="{% url 'directs' message.user.username %}">
-                      <div>
+    <div class="row">
+      <div class="col-md">
+      <nav class="navbar navbar-expand-md rounded-bottom">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#chats" aria-controls="chats" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="chats">
+            <div class="col navbar-nav">
+              <div class="card-body overflow-auto" style="height: 500px;">
+                {% for message in messages %}
+                  <div class="card my-2 opacity-100 rounded-5">
+                    <div class="card-body">
+                      <a class="{% if active_direct == message.user.username %}is-active{% endif %} text-decoration-none text-reset stretched-link" href="{% url 'directs' message.user.username %}">
                         <div>
-                          <p>
-                            <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
-                              <small class="text-muted">@{{ message.user.username }}</small>
-                                {% if message.unread == 0 %}
-                                {% else %}
-                                <span class="badge text-bg-secondary bg-danger"></span>
-                                {{message.unread}}
-                                <span class="visually-hidden">unread messages</span>
-                                {% endif %}
-                            </h5>
-                          </p>
+                          <div>
+                            <p>
+                              <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
+                                <small class="text-muted">@{{ message.user.username }}</small>
+                                  {% if message.unread == 0 %}
+                                  {% else %}
+                                  <span class="badge text-bg-secondary bg-danger"></span>
+                                  {{message.unread}}
+                                  <span class="visually-hidden">unread messages</span>
+                                  {% endif %}
+                              </h5>
+                            </p>
+                          </div>
+                          <div class="text-muted">
+                            {% if message.unread %}
+                              {{ message.unread }}
+                            {% endif %}        
+                          </div>
                         </div>
-                        <div class="text-muted">
-                          {% if message.unread %}
-                            {{ message.unread }}
-                          {% endif %}        
-                        </div>
-                      </div>
-                    </a>
+                      </a>
+                    </div>
                   </div>
-                </div>
-                
-              {% empty %}
-                <div class="text-center text-muted py-5">
-                  <em>Your inbox is empty... ( ＞︿＜ )</em>
-                </div>
-                <div class="text-center text-muted pb-5">
-                  <a class="text-reset" href="{% url 'usersearch' %}">Send someone a greeting now! 👋</a>
-                </div>
-              {% endfor %}
+                  
+                {% empty %}
+                  <div class="text-center text-muted py-5">
+                    <em>Your inbox is empty... ( ＞︿＜ )</em>
+                  </div>
+                  <div class="text-center text-muted pb-5">
+                    <a class="text-reset" href="{% url 'usersearch' %}">Send someone a greeting now! 👋</a>
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
+      </nav>
       </div>
-    </nav>
-    </div>
 
-    <div class="col">
-      <div class="card rounded-5 p-md-2 p-sm-1 m-md-3 m-sm-1" style="height: 500px; background-color: aliceblue;">
-        <div class="card-body overflow-auto">
-            <div class="text-center text-muted">
-              <em>Choose a message!</em>
+      <div class="col">
+        <div class="card rounded-5 p-md-2 p-sm-1 m-md-3 m-sm-1" style="height: 500px; background-color: aliceblue;">
+          <div class="card-body overflow-auto">
+              <div class="text-center text-muted">
+                <em>Choose a message!</em>
+              </div>
             </div>
-          </div>
+        </div>
       </div>
-    </div>
     </div>
   </div>
-</div>
-<div class="container text-center py-3">
-  <div class="text-center">Server Time: <span id='clock'></span></div>
-  <div class="text-center">Made with ❤️ by Team 8</div>
 </div>
 {% endblock %}
