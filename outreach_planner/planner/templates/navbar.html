@@ -33,6 +33,9 @@
               <div class="text-muted fw-light">@{{ request.user.username }}</div></a>
             </li>
             <li><a class="dropdown-item rounded-4" href="{% url 'edit-profile' %}">Edit Profile</a></li>
+            {% if user.is_superuser %}
+            <li><a class="dropdown-item rounded-4" href="/admin/">Admin Panel</a></li>
+            {% endif %}
             <li><hr class="dropdown-divider"></li>
             <li>
               <a class="dropdown-item rounded-4" href="{% url 'logout' %}">Logout</a>
