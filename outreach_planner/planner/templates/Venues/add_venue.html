@@ -52,11 +52,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label = "Close"></button>
             </div>
             {% endif %}
-            <div class="text-truncate text-center pb-3 px-3">
+            <div class="text-truncate text-start pb-3 px-3">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Submit" class="btn btn-success rounded-4">
+                        <div class="pt-3" >Venue Name:  {{ form.venue_name }} </div>
+                        
+                        <div class="pt-3">Address: {{ form.address }} </div>
+                    
+                        <div class="pt-3">Venue Link (if applicable):  {{ form.web_link }} </div>
+                        
+                        <div class="pt-3 text-wrap"> 
+                                <div> Contact Number: {{ form.phone }} </div>
+                            </div>
+                        <div class="pt-3 text-wrap">
+                                <div>Contact Email: {{ form.email }}</div>
+                        </div>
+                        <div class="pt-3 text-wrap">
+                            <div>Venue Image: {{ form.venue_image }}</div>
+                        </div>
+                        <div class="pt-3">    
+                            <div class="text-end"><input type="submit" value="Submit" class="btn btn-success rounded-4"></div>
+                        </div>
                 </form>
             </div>
         </div>
