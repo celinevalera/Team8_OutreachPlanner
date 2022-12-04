@@ -18,37 +18,40 @@
             </div>
         </div>
         <div class="col">
-            <div class="text-end">
-                <a class="btn btn-success btn-sm rounded-4" href="{% url 'edit-profile' %}">Edit Profile</a>
-            </div>
+            
         </div>
     </div>
 </div>
 <div class = "container">
     <div class="card shadow mx-5 opacity-100 rounded-5" style="background-color: #D1EEEA;">
-        <div class="card-body">
-            <div class="container text-center"></div>
+        <div class="card-body text-end">
+            <div class="text-truncate text-start pb-3 px-3">
                 <form method="POST">
-                    <div class="row align-items-start px-3 py-2">
-                        <div class="mb-3 mx-1 mt-3 px-5">
-                            <label for="input_email" class="form-label">Username:</label>
+                    {% csrf_token %}
+                        <div class="pt-3">
+                            <div class="form-label">Full Name (FN, LN) </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col">
+                                <div class="form-control rounded-4">{{ user.first_name }} {{ user.last_name }}</div>
+                            </div>
+                        </div>
+                        <div class="pt-3">
+                            <label for="input_email" class="form-label">Username</label>
                             <div class="form-control rounded-4">{{ user }}</div>
                         </div>
-                        <div class="col mb-3 mx-1 mt-3 px-5 ">
-                            <label for="input_email" class="form-label">First name:</label>
-                            <div class="form-control rounded-4">{{ user.first_name }}</div>
-                        </div>
-                        <div class="col mb-3 mx-1 mt-3 px-5 ">
-                            <label for="input_email" class="form-label">Last name:</label>
-                            <div class="form-control rounded-4" data-placeholder="Last Name">{{ user.last_name }}</div>
-                        </div>
-                        <div class="mb-3 mx-1 mt-3 px-5">
-                            <label for="input_email" class="form-label">Email:</label>
+                        <div class="pt-3">
+                            <label for="input_email" class="form-label">Email</label>
                             <div class="form-control rounded-4 " >{{ user.email }}</div> 
                         </div>
+                        <div class="pt-3">
+                            <div class="text-end">
+                                <a class="btn btn-success rounded-4" href="{% url 'edit-profile' %}">Edit Profile</a>
+                            </div>
+                        </div>
                     </div>
-                    
                 </form>
+            </div>    
         </div>
     </div>
 </div>
