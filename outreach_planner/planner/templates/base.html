@@ -2,6 +2,7 @@
 {% load static %}
 <html lang="en">
   <head>
+    <!-- Clock -->
     <script>
         function display_clock() {
             var x = new Date()
@@ -30,12 +31,79 @@
     </script>
 
     <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-  <!-- XDSoft DateTimePicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+    <script>
+      $(function () {
+        $("#id_event_date").datetimepicker({
+          format: 'm/d/Y H:i',
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <style>
+      .navbar-nav {
+          margin-left: auto;
+      }
+      .navbar-nav > .active > a {
+              color: red;
+          }
+      .color-me {
+          color:white;
+      }
 
+      input[type="datetime-local"]::-webkit-inner-spin-button,
+      input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+          /* display: none;
+          -webkit-appearance: none; */
+          margin:0;
+          
+      }
+      
+      input[id="update_date"]::-webkit-datetime-edit {
+          display: none;
+          
+      }
+
+      .cropped img {
+          height: 100%;
+          width: 100%;
+          max-height: 250px;
+          min-height: 250px;
+          object-fit: cover;
+      }
+
+      .cropped-sq img {
+          height: 100%;
+          width: 100%;
+          max-height: 300px;
+          min-height: 300px;
+          object-fit: cover;
+      }
+
+      div:empty:before{
+          content:attr(data-placeholder);
+          color:gray
+      }
+      
+      .fa fa-eye{
+          font-size: 15px;
+          color: #808080
+      }
+
+      .shadow-og {
+          box-shadow: 0 2px 5px 0 rgba(253, 186, 170,0.5), 
+      }
+
+      .box-shadow-hover:hover {
+          box-shadow: 0 2px 5px 0 
+          rgba(253, 186, 170,0.5), 0 
+          2px 10px 0 rgba(0, 0, 0, 1);
+      }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{% static 'logo-sm.png' %}"/>
@@ -46,8 +114,7 @@
     {% block head %}
     {% endblock head%}
   </head>
-  <body onload=display_clock();>
-    <div class="bg-image" style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
+  <body onload=display_clock(); style="background: url('https://cdn.discordapp.com/attachments/1021257672454066207/1036278402807767190/bg.png')
     no-repeat center center fixed; 
     background-size: cover;
     min-height: 100vh;">
@@ -58,76 +125,5 @@
         <div class="text-center">Server Time: <span id='clock'></span></div>
         <div class="text-center">Made with ❤️ by Team 8</div>
       </div>
-    </div>
-      <script>
-        $(function () {
-          $("#id_event_date").datetimepicker({
-            format: 'm/d/Y H:i',
-          });
-        });
-      </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <style>
-        .navbar-nav {
-            margin-left: auto;
-        }
-        .navbar-nav > .active > a {
-                color: red;
-            }
-        .color-me {
-            color:white;
-        }
-
-        input[type="datetime-local"]::-webkit-inner-spin-button,
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-            /* display: none;
-            -webkit-appearance: none; */
-            margin:0;
-            
-        }
-        
-        input[id="update_date"]::-webkit-datetime-edit {
-            display: none;
-            
-        }
-
-        .cropped img {
-            height: 100%;
-            width: 100%;
-            max-height: 250px;
-            min-height: 250px;
-            object-fit: cover;
-        }
-
-        .cropped-sq img {
-            height: 100%;
-            width: 100%;
-            max-height: 300px;
-            min-height: 300px;
-            object-fit: cover;
-        }
-
-        div:empty:before{
-            content:attr(data-placeholder);
-            color:gray
-        }
-        
-        .fa fa-eye{
-            font-size: 15px;
-            color: #808080
-        }
-
-        .shadow-og {
-            box-shadow: 0 2px 5px 0 rgba(253, 186, 170,0.5), 
-        }
-
-        .box-shadow-hover:hover {
-            box-shadow: 0 2px 5px 0 
-            rgba(253, 186, 170,0.5), 0 
-            2px 10px 0 rgba(0, 0, 0, 1);
-        }
-        
-        
-    </style>
   </body>
 </html>
