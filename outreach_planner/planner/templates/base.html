@@ -121,9 +121,12 @@
       <!-- Block content -->
       {% block content %}
       {% endblock content %}
+      {% if request.path  == '/users/login_user' or request.path == '/users/register_user' %}
+      {% else %}
       <div class="container text-center py-3">
         <div class="text-center">Server Time: <span id='clock'></span></div>
         <div class="text-center">Made with ❤️ by Team 8</div>
       </div>
+      {% endif %}
   </body>
 </html>
