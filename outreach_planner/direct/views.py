@@ -41,9 +41,11 @@ def inbox(request):
 def user_search(request):
 	query = request.GET.get("q")
 	context = {}
-	
+
 	if query:
-		users = User.objects.filter(Q(username__icontains=query))
+		users = User.objects.filter(Q(username__icontains=query) |
+                Q(first_name__icontains=query) |
+                Q(last_name__icontains=query))
 
 		#Pagination
 		paginator = Paginator(users, 6)
@@ -53,9 +55,9 @@ def user_search(request):
 		context = {
 				'users': users_paginator,
 			}
-	
+
 	template = loader.get_template('direct/search_user.html')
-	
+
 	return HttpResponse(template.render(context, request))
 
 @login_required
@@ -114,7 +116,7 @@ def senddirect(request):
 	from_user = request.user
 	to_user_username = request.POST.get('to_user')
 	body = request.POST.get('body')
-	
+
 	if request.method == 'POST':
 		to_user = User.objects.get(username=to_user_username)
 		Message.send_message(from_user, to_user, body)
@@ -138,4 +140,3 @@ def delete_msg(request,username):
 	directs.delete()
 
 	return redirect('/direct/')
-	
