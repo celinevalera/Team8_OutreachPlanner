@@ -52,7 +52,13 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request,("Edit profile successful!"))
             return redirect('view_profile')
+
+        else:
+            messages.success(request,("Invalid input. Please try again!"))
+            return redirect('edit-password')
+
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
@@ -64,7 +70,12 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request,form.user)
+            messages.success(request,("Change password successful!"))
             return redirect('view_profile')
+        else:
+            messages.success(request,("Invalid input. Please try again!"))
+            return redirect('change_password')
+
     else:
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}

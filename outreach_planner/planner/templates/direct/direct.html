@@ -53,18 +53,12 @@
                               <p>
                                 <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
                                   <small class="text-muted">@{{ message.user.username }}</small>
-                                    {% if message.unread == 0 %}
-                                    {% else %}
-                                    <span class="badge text-bg-secondary bg-danger"></span>
-                                    {{message.unread}}
-                                    <span class="visually-hidden">unread messages</span>
-                                    {% endif %}
                                 </h5>
                               </p>
                             </div>
                             <div class="text-muted">
                               {% if message.unread %}
-                                {{ message.unread }}
+                                <em>{{ message.unread }} unread messages</em>
                               {% endif %}        
                             </div>
                           </div>
