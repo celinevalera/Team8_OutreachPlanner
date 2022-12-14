@@ -24,14 +24,23 @@
 </div>
 <div class = "container">
     <div class="card shadow mx-5 opacity-100 rounded-5" style="background-color: #D1EEEA;">
+
         <div class="card-body text-end">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger alert-dismissible fade show rounded-4 text-center" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
             <div class="text-truncate text-start pb-3 px-3">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="pt-3">
                         <div class="form-label">Full Name (FN, LN) </div>
                     </div>
-                    <div class="row pt-3">
+                    <div class="row ">
                         <div class="col">
                             {{ form.first_name }}
                         </div>

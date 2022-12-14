@@ -10,7 +10,7 @@ class Message(models.Model):
 	sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
 	recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 	body = models.TextField(max_length=1000, blank=True, null=True)
-	date = models.DateTimeField(default=datetime.now())
+	date = models.DateTimeField(default=timezone.now)
 	is_read = models.BooleanField(default=False)
 
 	def send_message(from_user, to_user, body):

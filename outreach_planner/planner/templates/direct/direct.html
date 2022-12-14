@@ -8,7 +8,7 @@
 
 {% include 'navbar.html' %}
 <div class="container">
-  <div class="row align-items-center py-5 g-5">
+  <div class="row align-items-center py-5">
       <div class="col">
           <div class="text-start">
               <a class="btn btn-success btn-sm rounded-4" href="{% url 'inbox' %}">&larr; Back</a>
@@ -23,7 +23,6 @@
           <div class="text-end">
               <a class="btn btn-success btn-sm rounded-4" href="{% url 'usersearch' %}">Compose Message</a>
               <a class="btn btn-success btn-sm rounded-4" data-bs-toggle="modal" data-bs-target="#delete_confirmation">Delete message</a>
-              
           </div>
       </div>
   </div>
@@ -54,18 +53,12 @@
                               <p>
                                 <h5 class="card-title">{{ message.user.first_name }} {{ message.user.last_name }} 
                                   <small class="text-muted">@{{ message.user.username }}</small>
-                                    {% if message.unread == 0 %}
-                                    {% else %}
-                                    <span class="badge text-bg-secondary bg-danger"></span>
-                                    {{message.unread}}
-                                    <span class="visually-hidden">unread messages</span>
-                                    {% endif %}
                                 </h5>
                               </p>
                             </div>
                             <div class="text-muted">
                               {% if message.unread %}
-                                {{ message.unread }}
+                                <em>{{ message.unread }} unread messages</em>
                               {% endif %}        
                             </div>
                           </div>
@@ -97,7 +90,7 @@
                     <div>
                       <div>
                         <p>
-                          <strong>{{ direct.sender.first_name }} {{ direct.sender.last_name }}</strong> <small class="text-muted fw-light">@{{ direct.sender.username }} <em>| {{ direct.date|date:'N d G:i'}}</em></small>
+                          <strong>{{ direct.sender.first_name }} {{ direct.sender.last_name }}</strong> <small class="text-muted fw-light">@{{ direct.sender.username }} |<em> {{ direct.date|date:'N d g:i a'}}</em></small>
                           </h5>
                         </p>
                         {{ direct.body }} 
